@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELPIS.CO &mdash; Interior Design, Build &amp; Renovation</title>
+<meta name="description" content="Elpis.Co transforms houses into exceptional homes through design and craftsmanship. Interior design, build and renovation services." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #F5F0E9; }
+  a { color: #12213A; text-decoration: none; }
+  a:hover { color: #B08D57; }
+  .zoomwrap img { transition: transform 700ms cubic-bezier(.2,.7,.3,1); }
+  .zoomwrap:hover img { transform: scale(1.05); }
+  .arrowlink .arw { transition: transform 350ms ease; display: inline-block; }
+  .arrowlink:hover .arw { transform: translateX(8px); }
+  @keyframes scrollcue { 0% { transform: translateY(0); opacity: .2 } 40% { opacity: 1 } 100% { transform: translateY(14px); opacity: .2 } }
+  nav a, .brand-sub, .brand-name { white-space: nowrap; }
+  .navtoggle { display: none; }
+
+  .btn-quote { background: #B08D57; color: #FFFFFF; transition: background 200ms ease; }
+  .btn-quote:hover { background: #9C7A46; color: #FFFFFF; }
+  .btn-hero { background: #12213A; color: #FFFFFF; transition: background 200ms ease; }
+  .btn-hero:hover { background: #B08D57; color: #FFFFFF; }
+
+  .nav-row { display: flex; align-items: center; gap: 34px; }
+  .mobile-nav { display: none; }
+  .mobile-nav.open { display: flex; }
+
+  .footer-row > * { min-width: 0; }
+  @media (max-width: 1180px) {
+    .nav-row { gap: 22px !important; }
+    .footer-nav { gap: 20px !important; }
+  }
+  @media (max-width: 1080px) {
+    .services-grid { grid-template-columns: repeat(3, 1fr) !important; row-gap: 48px !important; }
+    .footer-row { flex-wrap: wrap; row-gap: 28px !important; }
+    .footer-nav { flex-wrap: wrap; }
+  }
+  @media (max-width: 1060px) {
+    .nav-row { display: none !important; }
+    .navtoggle { display: flex !important; }
+  }
+  @media (max-width: 900px) {
+    .nav-row { display: none !important; }
+    .navtoggle { display: flex !important; }
+    .about-grid, .projects-grid { grid-template-columns: 1fr !important; }
+    .about-grid { gap: 40px !important; }
+    .about-grid .about-copy { order: 2; }
+    .about-grid .about-media { order: 1; }
+    .projects-head { flex-direction: column; align-items: flex-start !important; gap: 24px !important; }
+    .hero-h1 { font-size: 52px !important; }
+  }
+  @media (max-width: 720px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; row-gap: 44px !important; }
+    .stats-grid > div:nth-child(3) { border-left: none !important; }
+    .hero-h1 { font-size: 44px !important; }
+    .footer-row { flex-direction: column; align-items: flex-start !important; gap: 28px !important; }
+    .footer-nav { flex-wrap: wrap; gap: 18px !important; }
+    .foot-legal { flex-direction: column; gap: 10px !important; }
+  }
+</style>
+</head>
+<body>
+
+<div style="background: #F5F0E9; color: #3A3A38; font-family: Jost, system-ui, sans-serif; overflow-x: hidden;">
+
+  <header style="position: absolute; top: 0; left: 0; right: 0; z-index: 20; padding: 28px 40px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px;">
+      <a href="#top" style="display: flex; align-items: center; gap: 14px;">
+        <span style="width: 42px; height: 42px; border-radius: 50%; background: #12213A; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #F5F0E9; line-height: 1; padding-bottom: 3px;">e<span style="color: #B08D57;">.</span></span>
+        <span style="display: flex; flex-direction: column; gap: 4px;">
+          <span class="brand-name" style="font-size: 17px; letter-spacing: 0.22em; color: #12213A; font-weight: 500;">ELPIS.CO</span>
+          <span class="brand-sub" style="font-size: 8.5px; letter-spacing: 0.2em; color: #3A3A38;">INTERIOR DESIGN &bull; BUILD &bull; RENOVATION</span>
+        </span>
+      </a>
+      <button id="navtoggle" class="navtoggle" aria-label="Open menu" aria-expanded="false" style="display: none; flex-direction: column; gap: 5px; background: none; border: 0; padding: 10px; cursor: pointer;">
+        <span style="width: 22px; height: 1px; background: #12213A; display: block;"></span>
+        <span style="width: 22px; height: 1px; background: #12213A; display: block;"></span>
+        <span style="width: 22px; height: 1px; background: #12213A; display: block;"></span>
+      </button>
+      <nav class="nav-row">
+        <a href="#top" style="font-size: 11.5px; letter-spacing: 0.14em; color: #B08D57; padding-bottom: 5px; border-bottom: 1px solid #B08D57;">HOME</a>
+        <a href="#about" style="font-size: 11.5px; letter-spacing: 0.14em; color: #12213A;">ABOUT US</a>
+        <a href="#services" style="font-size: 11.5px; letter-spacing: 0.14em; color: #12213A;">SERVICES</a>
+        <a href="#projects" style="font-size: 11.5px; letter-spacing: 0.14em; color: #12213A;">PROJECTS</a>
+        <a href="#journal" style="font-size: 11.5px; letter-spacing: 0.14em; color: #12213A;">JOURNAL</a>
+        <a href="#quote" class="btn-quote" style="font-size: 11.5px; letter-spacing: 0.14em; padding: 15px 30px; margin-left: 6px;">GET A QUOTE</a>
+      </nav>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" style="flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #FAF7F2; border-bottom: 1px solid #E0D8CC; padding: 18px 40px 26px; gap: 18px;">
+      <a href="#top" style="font-size: 12px; letter-spacing: 0.14em; color: #12213A;">HOME</a>
+      <a href="#about" style="font-size: 12px; letter-spacing: 0.14em; color: #12213A;">ABOUT US</a>
+      <a href="#services" style="font-size: 12px; letter-spacing: 0.14em; color: #12213A;">SERVICES</a>
+      <a href="#projects" style="font-size: 12px; letter-spacing: 0.14em; color: #12213A;">PROJECTS</a>
+      <a href="#journal" style="font-size: 12px; letter-spacing: 0.14em; color: #12213A;">JOURNAL</a>
+      <a href="#quote" class="btn-quote" style="display: inline-block; font-size: 12px; letter-spacing: 0.14em; padding: 14px 28px; text-align: center;">GET A QUOTE</a>
+    </nav>
+  </header>
+
+  <section id="top" style="position: relative; height: 88vh; min-height: 660px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+    <img src="assets/hero.png" alt="Open-plan living room with cream sectional sofa and marble kitchen island" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,240,233,0.78) 0%, rgba(245,240,233,0.5) 52%, rgba(245,240,233,0.16) 100%);"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(58% 46% at 50% 42%, rgba(245,240,233,0.62) 0%, rgba(245,240,233,0.28) 58%, rgba(245,240,233,0) 100%);"></div>
+    <div style="position: relative; text-align: center; padding: 0 24px; margin-top: -40px;">
+      <h1 class="hero-h1" style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 78px; line-height: 1.08; color: #12213A; margin: 0; letter-spacing: -0.01em;">
+        <span style="display: block;">Reimagine.</span>
+        <span style="display: block;">Renovate.</span>
+        <span style="display: block;">Relive.</span>
+      </h1>
+      <p style="font-size: 16px; line-height: 1.65; color: #12213A; max-width: 340px; margin: 30px auto 0;">Transforming houses into exceptional homes through design and craftsmanship.</p>
+      <a href="#projects" class="btn-hero" style="display: inline-block; margin-top: 34px; font-size: 12px; letter-spacing: 0.16em; padding: 19px 40px;">VIEW OUR PROJECTS</a>
+    </div>
+    <div style="position: absolute; bottom: 118px; left: 50%; transform: translateX(-50%); width: 24px; height: 40px; border: 1px solid rgba(18,33,58,0.45); border-radius: 12px; display: flex; justify-content: center; padding-top: 9px;">
+      <span style="width: 3px; height: 3px; border-radius: 50%; background: #12213A; animation: scrollcue 1.8s ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <section id="services" style="max-width: 1200px; margin: -76px auto 0; padding: 0 40px; position: relative; z-index: 10;">
+    <div style="background: #FAF7F2; border: 1px solid #E0D8CC; padding: 52px 48px 56px;">
+      <p style="text-align: center; font-size: 11px; letter-spacing: 0.22em; color: #12213A; margin: 0 0 44px;">OUR SERVICES</p>
+      <div class="services-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px;">
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#B08D57" stroke-width="1"><rect x="7" y="7" width="24" height="24" /><rect x="13" y="13" width="12" height="12" /><path d="M7 13h6M25 13h6M7 25h6M25 25h6" /></svg>
+          <p style="margin: 0; font-size: 11.5px; letter-spacing: 0.14em; color: #12213A; font-weight: 500;">DESIGN &amp; PLAN</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.75; color: #6B6760; max-width: 165px;">Thoughtful design meets functional living.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#B08D57" stroke-width="1"><path d="M6 31h26" /><rect x="9" y="17" width="9" height="14" /><rect x="20" y="12" width="9" height="19" /><path d="M13.5 6v8M9 10h9" /></svg>
+          <p style="margin: 0; font-size: 11.5px; letter-spacing: 0.14em; color: #12213A; font-weight: 500;">BUILD &amp; RENOVATE</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.75; color: #6B6760; max-width: 165px;">Quality craftsmanship. Seamless execution.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#B08D57" stroke-width="1"><rect x="6" y="10" width="26" height="21" /><path d="M6 20h13M19 20v11M19 10v4" /><path d="M11 6h16" /></svg>
+          <p style="margin: 0; font-size: 11.5px; letter-spacing: 0.14em; color: #12213A; font-weight: 500;">SPACE PLANNING</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.75; color: #6B6760; max-width: 165px;">Smart layouts for beautiful living.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#B08D57" stroke-width="1"><rect x="8" y="6" width="22" height="26" /><path d="M13 13h5M13 19h12M13 25h8" /><circle cx="26" cy="12" r="2" /></svg>
+          <p style="margin: 0; font-size: 11.5px; letter-spacing: 0.14em; color: #12213A; font-weight: 500;">PROJECT MANAGEMENT</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.75; color: #6B6760; max-width: 175px;">End-to-end management with peace of mind.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#B08D57" stroke-width="1"><path d="M6 17L19 6l13 11" /><path d="M10 17v14h18V17" /><path d="M16 31v-9h6v9" /></svg>
+          <p style="margin: 0; font-size: 11.5px; letter-spacing: 0.14em; color: #12213A; font-weight: 500;">END-TO-END CARE</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.75; color: #6B6760; max-width: 165px;">From concept to completion and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="max-width: 1200px; margin: 0 auto; padding: 104px 40px;">
+    <div class="about-grid" style="display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 72px; align-items: center;">
+      <div class="about-copy">
+        <p style="margin: 0 0 26px; font-size: 11px; letter-spacing: 0.22em; color: #B08D57;">WHY ELPIS.CO</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 44px; line-height: 1.16; color: #12213A; margin: 0; letter-spacing: -0.01em;">Passionate about creating beautiful, functional spaces.</h2>
+        <p style="font-size: 14.5px; line-height: 1.85; color: #6B6760; max-width: 300px; margin: 30px 0 0;">Our team brings vision, experience, and dedication to deliver spaces that inspire and endure.</p>
+        <a class="arrowlink" href="#about" style="display: inline-flex; align-items: center; gap: 16px; margin-top: 42px; font-size: 11.5px; letter-spacing: 0.16em; color: #12213A;">ABOUT US <span class="arw" style="font-size: 15px;">&#8594;</span></a>
+      </div>
+      <div class="about-media" style="overflow: hidden;">
+        <img src="assets/about.png" alt="Timber-panelled entrance corridor with warm cove lighting" style="width: 100%; height: 460px; object-fit: cover; display: block;" />
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" style="max-width: 1200px; margin: 0 auto; padding: 0 40px 104px;">
+    <div class="projects-head" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 44px;">
+      <div>
+        <p style="margin: 0 0 22px; font-size: 11px; letter-spacing: 0.22em; color: #B08D57;">FEATURED PROJECTS</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 44px; line-height: 1.14; color: #12213A; margin: 0; letter-spacing: -0.01em;">Spaces we&rsquo;re<br />proud of.</h2>
+      </div>
+      <a class="arrowlink" href="#projects" style="display: inline-flex; align-items: center; gap: 16px; font-size: 11.5px; letter-spacing: 0.16em; color: #12213A; padding-bottom: 8px;">VIEW ALL PROJECTS <span class="arw" style="font-size: 15px;">&#8594;</span></a>
+    </div>
+    <div class="projects-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px;">
+      <a href="#projects" style="display: block;">
+        <div class="zoomwrap" style="overflow: hidden;">
+          <img src="assets/project-1.png" alt="Modern Minimalist Home living room" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+        </div>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 21px; color: #12213A; margin: 24px 0 0;">Modern Minimalist Home</h3>
+        <p style="margin: 10px 0 0; font-size: 12.5px; color: #8A857D;">Urban Living</p>
+      </a>
+      <a href="#projects" style="display: block;">
+        <div class="zoomwrap" style="overflow: hidden;">
+          <img src="assets/project-2.png" alt="Warm &amp; Natural Residence at dusk" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+        </div>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 21px; color: #12213A; margin: 24px 0 0;">Warm &amp; Natural Residence</h3>
+        <p style="margin: 10px 0 0; font-size: 12.5px; color: #8A857D;">Family Home</p>
+      </a>
+      <a href="#projects" style="display: block;">
+        <div class="zoomwrap" style="overflow: hidden;">
+          <img src="assets/project-3.png" alt="Contemporary Family Home with mountain view" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+        </div>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 21px; color: #12213A; margin: 24px 0 0;">Contemporary Family Home</h3>
+        <p style="margin: 10px 0 0; font-size: 12.5px; color: #8A857D;">Oceanview</p>
+      </a>
+    </div>
+  </section>
+
+  <section style="background: #12213A; padding: 68px 40px;">
+    <div class="stats-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);">
+      <div style="text-align: center; padding: 0 20px;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 54px; color: #B08D57; margin: 0; line-height: 1;">10+</p>
+        <p style="margin: 20px 0 0; font-size: 10.5px; letter-spacing: 0.2em; color: #FFFFFF;">YEARS OF EXPERIENCE</p>
+      </div>
+      <div style="text-align: center; padding: 0 20px; border-left: 1px solid rgba(255,255,255,0.16);">
+        <p style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 54px; color: #B08D57; margin: 0; line-height: 1;">250+</p>
+        <p style="margin: 20px 0 0; font-size: 10.5px; letter-spacing: 0.2em; color: #FFFFFF;">PROJECTS COMPLETED</p>
+      </div>
+      <div style="text-align: center; padding: 0 20px; border-left: 1px solid rgba(255,255,255,0.16);">
+        <p style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 54px; color: #B08D57; margin: 0; line-height: 1;">98%</p>
+        <p style="margin: 20px 0 0; font-size: 10.5px; letter-spacing: 0.2em; color: #FFFFFF;">CLIENT SATISFACTION</p>
+      </div>
+      <div style="text-align: center; padding: 0 20px; border-left: 1px solid rgba(255,255,255,0.16);">
+        <p style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 54px; color: #B08D57; margin: 0; line-height: 1;">30+</p>
+        <p style="margin: 20px 0 0; font-size: 10.5px; letter-spacing: 0.2em; color: #FFFFFF;">DESIGN AWARDS</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="journal" style="background: #FAF7F2; padding: 40px 40px 28px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="footer-row" style="display: flex; align-items: center; justify-content: space-between; gap: 40px;">
+        <a href="#top" style="display: flex; align-items: center; gap: 14px;">
+          <span style="width: 38px; height: 38px; border-radius: 50%; background: #12213A; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 23px; color: #F5F0E9; line-height: 1; padding-bottom: 3px;">e<span style="color: #B08D57;">.</span></span>
+          <span style="display: flex; flex-direction: column; gap: 4px;">
+            <span class="brand-name" style="font-size: 15px; letter-spacing: 0.22em; color: #12213A; font-weight: 500;">ELPIS.CO</span>
+            <span class="brand-sub" style="font-size: 7.5px; letter-spacing: 0.2em; color: #6B6760;">INTERIOR DESIGN &bull; BUILD &bull; RENOVATION</span>
+          </span>
+        </a>
+        <nav class="footer-nav" style="display: flex; align-items: center; gap: 30px;">
+          <a href="#top" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">HOME</a>
+          <a href="#about" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">ABOUT US</a>
+          <a href="#services" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">SERVICES</a>
+          <a href="#projects" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">PROJECTS</a>
+          <a href="#journal" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">JOURNAL</a>
+          <a href="#quote" style="font-size: 11px; letter-spacing: 0.14em; color: #12213A;">CONTACT</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <a href="#journal" aria-label="Instagram" style="display: flex;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="#B08D57" stroke="none" /></svg></a>
+          <a href="#journal" aria-label="Pinterest" style="display: flex;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><circle cx="12" cy="12" r="9" /><path d="M9.5 19l2-8" /><path d="M9 10.5c0-2 1.4-3.4 3.3-3.4 1.9 0 3.2 1.2 3.2 3 0 2.2-1.2 3.9-2.9 3.9-.9 0-1.6-.7-1.4-1.6" /></svg></a>
+          <a href="#journal" aria-label="LinkedIn" style="display: flex;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" /><path d="M7.5 10.5V17M7.5 7.2v.1M12 17v-4a2.5 2.5 0 015 0v4" /></svg></a>
+        </div>
+      </div>
+      <div class="foot-legal" style="border-top: 1px solid #E0D8CC; margin-top: 34px; padding-top: 22px; display: flex; justify-content: space-between; gap: 24px;">
+        <p style="margin: 0; font-size: 11px; letter-spacing: 0.1em; color: #8A857D;">&copy; 2026 ELPIS.CO. ALL RIGHTS RESERVED.</p>
+        <p style="margin: 0; font-size: 11px; letter-spacing: 0.1em; color: #8A857D;">PRIVACY &nbsp;&nbsp;&bull;&nbsp;&nbsp; TERMS</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  var toggle = document.getElementById('navtoggle');
+  var mobileNav = document.getElementById('mobile-nav');
+  toggle.addEventListener('click', function () {
+    var isOpen = mobileNav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+</body>
+</html>
