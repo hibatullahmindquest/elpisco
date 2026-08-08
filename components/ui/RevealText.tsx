@@ -43,20 +43,31 @@ export function RevealText({
     }
 
     registerGsap();
+    gsap.set(spans, { yPercent: 110 });
 
-    const ctx = gsap.context(() => {
-      gsap.set(spans, { yPercent: 110 });
-      gsap.to(spans, {
-        yPercent: 0,
-        duration: 1,
-        delay,
-        ease: "power4.out",
-        stagger,
-        scrollTrigger: immediate ? undefined : { trigger: el, start },
-      });
-    }, el);
+    // Defer the ScrollTrigger-owning context to the next frame. React 18/19
+    // Strict Mode (dev only) mounts -> cleans up -> remounts every effect
+    // synchronously before any paint; deferring means the throwaway first
+    // mount's rAF never fires (cancelled below), so only the real mount
+    // ever creates a trigger, against final settled layout.
+    let ctx: ReturnType<typeof gsap.context> | null = null;
+    const raf = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        gsap.to(spans, {
+          yPercent: 0,
+          duration: 1,
+          delay,
+          ease: "power4.out",
+          stagger,
+          scrollTrigger: immediate ? undefined : { trigger: el, start },
+        });
+      }, el);
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancelAnimationFrame(raf);
+      ctx?.revert();
+    };
   }, [stagger, start, immediate, delay]);
 
   const Tag = as as React.ElementType;

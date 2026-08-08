@@ -58,7 +58,7 @@ function ProjectRow({
     return (
       <section data-nav-theme="light" style={{ background: "var(--warm-white)", paddingBlock: "clamp(48px, 8vw, 96px)" }}>
         <div className="container">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, gap: 24 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 32, gap: 24 }}>
             <div>
               <SectionLabel>{`0${index} / ${project.type}`}</SectionLabel>
               <div style={{ marginTop: 12 }}>{title}</div>

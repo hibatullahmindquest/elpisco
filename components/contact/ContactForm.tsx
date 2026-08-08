@@ -42,7 +42,7 @@ export function ContactForm() {
             <option value="Not Sure Yet">Not Sure Yet</option>
           </select>
         </div>
-        <div className="field col-line-4-end">
+        <div className="field col-line-5-end">
           <label htmlFor="propertyType">Property Type</label>
           <input id="propertyType" name="Property Type" type="text" placeholder="e.g. Landed, condo" />
         </div>

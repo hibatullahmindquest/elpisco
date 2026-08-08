@@ -45,36 +45,42 @@ export function ParallaxImage({
     if (reduce) return;
 
     registerGsap();
+    gsap.set(img, { scale: 1.08, yPercent: 4 });
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        img,
-        { scale: 1.08, yPercent: 4 },
-        {
+    // Deferred for the same reason as RevealText: avoids React Strict
+    // Mode's dev-only double-mount leaving a ScrollTrigger with stale
+    // cached measurements.
+    let ctx: ReturnType<typeof gsap.context> | null = null;
+    const raf = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        gsap.to(img, {
           scale: 1,
           yPercent: 0,
           duration: 1.4,
           delay,
           ease: "power3.out",
           scrollTrigger: immediate ? undefined : { trigger: wrap, start: "top 80%" },
-        }
-      );
-
-      if (parallax) {
-        gsap.to(img, {
-          y: -28,
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrap,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
         });
-      }
-    }, wrap);
 
-    return () => ctx.revert();
+        if (parallax) {
+          gsap.to(img, {
+            y: -28,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrap,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+        }
+      }, wrap);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ctx?.revert();
+    };
   }, [parallax, immediate, delay]);
 
   return (

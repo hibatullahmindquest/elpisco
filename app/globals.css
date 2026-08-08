@@ -157,6 +157,9 @@ button {
 .col-line-4-end {
   grid-column: 4 / -1;
 }
+.col-line-5-end {
+  grid-column: 5 / -1;
+}
 .col-line-6-end {
   grid-column: 6 / -1;
 }
