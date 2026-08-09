@@ -66,18 +66,19 @@ export function Process() {
       </div>
 
       <div className="container grid-12" style={{ marginTop: "clamp(40px, 6vw, 72px)", rowGap: 24 }}>
-        <div style={{ gridColumn: "1 / span 4" }}>
-          <div style={{ position: "sticky", top: "calc(var(--header-h) + 24px)" }} className="process-sticky">
-            <p className="label" style={{ color: "var(--champagne-ink)" }}>
-              Step {active + 1} of {STEPS.length}
-            </p>
-            <p className="h-project" style={{ color: "var(--ink)", marginTop: 10, fontSize: "clamp(48px, 6vw, 96px)" }}>
-              {STEPS[active].n}
-            </p>
-            <p className="label" style={{ color: "var(--ink)", marginTop: 6 }}>
-              {STEPS[active].title}
-            </p>
-          </div>
+        <div
+          style={{ gridColumn: "1 / span 4", position: "sticky", top: "calc(var(--header-h) + 24px)" }}
+          className="process-sticky"
+        >
+          <p className="label" style={{ color: "var(--champagne-ink)" }}>
+            Step {active + 1} of {STEPS.length}
+          </p>
+          <p className="h-project" style={{ color: "var(--ink)", marginTop: 10, fontSize: "clamp(48px, 6vw, 96px)" }}>
+            {STEPS[active].n}
+          </p>
+          <p className="label" style={{ color: "var(--ink)", marginTop: 6 }}>
+            {STEPS[active].title}
+          </p>
         </div>
 
         <div className="col-line-6-end">
