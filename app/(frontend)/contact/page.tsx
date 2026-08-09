@@ -3,7 +3,8 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getSiteSettings } from "@/lib/siteSettings";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
     description: "Start a project with Elpis.co. Interior design, renovation and design & build in Shah Alam, Malaysia.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Contact", path: "/contact" },
+]);
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
@@ -25,6 +31,8 @@ export default async function ContactPage() {
   ];
 
   return (
+    <>
+    <JsonLd data={breadcrumbJsonLd} />
     <section
       data-nav-theme="light"
       style={{
@@ -89,5 +97,6 @@ export default async function ContactPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

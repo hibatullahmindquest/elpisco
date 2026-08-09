@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProjectAssessment } from "@/components/project-assessment/ProjectAssessment";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,16 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Start a Project", path: "/start-a-project" },
+]);
+
 export default function StartAProjectPage() {
-  return <ProjectAssessment />;
+  return (
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <ProjectAssessment />
+    </>
+  );
 }

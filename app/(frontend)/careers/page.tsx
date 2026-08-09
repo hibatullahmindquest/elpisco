@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getOpenCareers } from "@/lib/careers";
 import { getSiteSettings } from "@/lib/siteSettings";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +16,17 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Careers", path: "/careers" },
+]);
+
 export default async function CareersPage() {
   const [roles, settings] = await Promise.all([getOpenCareers(), getSiteSettings()]);
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{

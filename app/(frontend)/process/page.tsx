@@ -2,16 +2,22 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/process", {
-    title: "Process",
+    title: "Our Process",
     description: "A renovation contains hundreds of decisions. Our process creates a clear order for making them.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Process", path: "/process" },
+]);
 
 const STAGES = [
   {
@@ -75,6 +81,7 @@ const STAGES = [
 export default function ProcessPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{

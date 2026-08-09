@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Accordion } from "@/components/ui/Accordion";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getFaqs } from "@/lib/faq";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/faq", {
-    title: "FAQ",
+    title: "FAQ | Renovation & Interior Design",
     description: "A few of the questions homeowners usually ask before starting a renovation with Elpis.",
   });
 }
@@ -44,11 +45,15 @@ export default async function FaqPage() {
         }
       : null;
 
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "FAQ", path: "/faq" },
+  ]);
+
   return (
     <>
-      {jsonLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      )}
+      {jsonLd && <JsonLd data={jsonLd} />}
+      <JsonLd data={breadcrumbJsonLd} />
 
       <section
         data-nav-theme="light"

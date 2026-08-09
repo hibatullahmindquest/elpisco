@@ -10,6 +10,7 @@ import { getSiteSettings } from "@/lib/siteSettings";
 import { getRootMetadata, getOrganizationJsonLd } from "@/lib/seo";
 import { getTrackingSettings } from "@/lib/tracking";
 import { TrackingHeadCode, TrackingBodyStart, TrackingBodyEnd } from "@/components/analytics/Tracking";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -74,12 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <TrackingBodyStart settings={tracking} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
+        <JsonLd data={organizationJsonLd} />
         <SmoothScroll>
           <CustomCursor />
           <Header

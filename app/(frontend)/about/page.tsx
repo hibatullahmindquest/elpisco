@@ -4,18 +4,24 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getCredentials } from "@/lib/credentials";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/about", {
-    title: "About Elpis",
+    title: "About Elpis | Interior Design & Renovation Studio Malaysia",
     description:
       "Elpis is an interior design, renovation and design-and-build studio based in Shah Alam, Malaysia, connecting design thinking with disciplined execution.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+]);
 
 const CORE_VALUES = [
   { n: "01", title: "INTENTION", body: "Every design decision should have a reason." },
@@ -47,6 +53,7 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{

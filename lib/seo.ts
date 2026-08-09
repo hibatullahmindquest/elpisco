@@ -70,10 +70,10 @@ export async function getPageMetadata(
 
 export async function getRootMetadata(): Promise<Metadata> {
   const seo = await getSeoGlobal();
-  const title = seo?.defaultMetaTitle || "Elpis.co | Interior Design & Renovation";
+  const title = seo?.defaultMetaTitle || "Elpis.co | Interior Design, Renovation & Design Build Malaysia";
   const description =
     seo?.defaultMetaDescription ||
-    "Elpis.co is an interior design, renovation and design & build studio based in Shah Alam, Malaysia. Spaces shaped around the way you live.";
+    "Elpis is a design-led interior design, renovation and design-and-build studio in Malaysia, creating considered residential spaces from concept to handover.";
   const ogImageUrl = mediaUrl(seo?.defaultOgImage);
 
   return {
@@ -172,6 +172,19 @@ export async function getProjectJsonLd(project: {
       name: settings.siteName,
       url: SITE_URL,
     },
+  };
+}
+
+export function getBreadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path === "/" ? "" : item.path}`,
+    })),
   };
 }
 

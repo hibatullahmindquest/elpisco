@@ -5,22 +5,29 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getProjects } from "@/lib/projects";
 import type { Project } from "@/data/projects";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/projects", {
-    title: "Selected Work",
+    title: "Projects | Selected Interior & Renovation Work",
     description: "A selection of interior design, renovation and design & build projects by Elpis.co.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Selected Work", path: "/projects" },
+]);
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section data-nav-theme="light" style={{ background: "var(--warm-white)", paddingTop: "calc(var(--header-h) + clamp(48px, 10vw, 96px))", paddingBottom: "clamp(48px, 8vw, 88px)" }}>
         <div className="container">
           <SectionLabel>Selected work</SectionLabel>

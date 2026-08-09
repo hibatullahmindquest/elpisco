@@ -2,18 +2,24 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getTestimonials } from "@/lib/testimonials";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/why-elpis", {
-    title: "Why Elpis",
+    title: "Why Elpis | Design-Led Renovation Malaysia",
     description:
       "A premium renovation is not only a question of materials. It is the quality of the thinking, coordination and decisions behind them.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Why Elpis", path: "/why-elpis" },
+]);
 
 const REASONS = [
   {
@@ -53,6 +59,7 @@ export default async function WhyElpisPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{

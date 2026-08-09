@@ -3,17 +3,23 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getPageMetadata } from "@/lib/seo";
+import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/services", {
-    title: "Services",
+    title: "Services | Interior Design, Renovation & Design Build",
     description:
       "Interior design, renovation, design & build, custom cabinetry and project management, from Elpis.co.",
   });
 }
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+]);
 
 const SERVICES = [
   {
@@ -118,6 +124,7 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{

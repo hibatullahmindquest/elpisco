@@ -7,7 +7,8 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ProjectMeta } from "@/components/ui/ProjectMeta";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getProject, getProjects } from "@/lib/projects";
-import { getProjectMetadata, getProjectJsonLd } from "@/lib/seo";
+import { getProjectMetadata, getProjectJsonLd, getBreadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -33,13 +34,16 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
   const index = projects.findIndex((p) => p.slug === slug);
   const next = projects[(index + 1) % projects.length];
   const jsonLd = await getProjectJsonLd(project);
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Selected Work", path: "/projects" },
+    { name: project.title, path: `/projects/${project.slug}` },
+  ]);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         data-nav-theme="light"
         style={{
