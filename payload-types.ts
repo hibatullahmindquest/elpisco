@@ -1564,7 +1564,7 @@ export interface SiteSetting {
   /**
    * A curated set of font pairs. Self-hosted fonts must be built into the site ahead of time, so this isn't a free-text field.
    */
-  fontPreset?: ('instrument-manrope' | 'playfair-inter') | null;
+  fontPreset?: ('instrument-manrope' | 'playfair-inter' | 'playfair-montserrat') | null;
   contact?: {
     email?: string | null;
     whatsappUrl?: string | null;

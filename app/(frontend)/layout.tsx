@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Manrope, Playfair_Display, Inter } from "next/font/google";
+import { Instrument_Serif, Manrope, Playfair_Display, Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Header } from "@/components/layout/Header";
@@ -44,6 +44,12 @@ const inter = Inter({
   display: "swap",
 });
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-sans-montserrat",
+  display: "swap",
+});
+
 export async function generateMetadata(): Promise<Metadata> {
   return getRootMetadata();
 }
@@ -62,12 +68,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           "--font-display": "var(--font-display-playfair)",
           "--font-sans": "var(--font-sans-inter)",
         } as React.CSSProperties)
-      : undefined;
+      : settings.fontPreset === "playfair-montserrat"
+        ? ({
+            "--font-display": "var(--font-display-playfair)",
+            "--font-sans": "var(--font-sans-montserrat)",
+          } as React.CSSProperties)
+        : undefined;
 
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${manrope.variable} ${playfairDisplay.variable} ${inter.variable}`}
+      className={`${instrumentSerif.variable} ${manrope.variable} ${playfairDisplay.variable} ${inter.variable} ${montserrat.variable}`}
       style={fontOverride}
     >
       <head>

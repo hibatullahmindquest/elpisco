@@ -5,7 +5,7 @@ export type SiteSettings = {
   siteName: string;
   logoUrl: string | null;
   tagline: string;
-  fontPreset: "instrument-manrope" | "playfair-inter";
+  fontPreset: "instrument-manrope" | "playfair-inter" | "playfair-montserrat";
   email: string;
   whatsappUrl: string;
   instagramUrl: string;

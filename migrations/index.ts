@@ -23,6 +23,7 @@ import * as migration_20260809_095403_restore_images_and_headline_accent from '.
 import * as migration_20260809_095500_restore_images_and_two_tone_headlines from './20260809_095500_restore_images_and_two_tone_headlines';
 import * as migration_20260809_102648_add_sticky_step_list_block from './20260809_102648_add_sticky_step_list_block';
 import * as migration_20260809_102700_restore_home_process_sticky_scroll from './20260809_102700_restore_home_process_sticky_scroll';
+import * as migration_20260809_105102_add_playfair_montserrat_font_preset from './20260809_105102_add_playfair_montserrat_font_preset';
 
 export const migrations = [
   {
@@ -149,5 +150,10 @@ export const migrations = [
     up: migration_20260809_102700_restore_home_process_sticky_scroll.up,
     down: migration_20260809_102700_restore_home_process_sticky_scroll.down,
     name: '20260809_102700_restore_home_process_sticky_scroll',
+  },
+  {
+    up: migration_20260809_105102_add_playfair_montserrat_font_preset.up,
+    down: migration_20260809_105102_add_playfair_montserrat_font_preset.down,
+    name: '20260809_105102_add_playfair_montserrat_font_preset'
   },
 ];

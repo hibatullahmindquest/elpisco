@@ -34,6 +34,7 @@ export const SiteSettings: GlobalConfig = {
       options: [
         { label: "Instrument Serif + Manrope (default)", value: "instrument-manrope" },
         { label: "Playfair Display + Inter", value: "playfair-inter" },
+        { label: "Playfair Display + Montserrat", value: "playfair-montserrat" },
       ],
       admin: {
         description:
