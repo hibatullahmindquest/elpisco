@@ -2,11 +2,15 @@
   "name": "elpisco",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "payload": "payload",
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.87.1",
