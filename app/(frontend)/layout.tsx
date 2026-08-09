@@ -5,6 +5,9 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { getNavigation } from "@/lib/navigation";
+
+export const dynamic = "force-dynamic";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -44,13 +47,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const navItems = await getNavigation();
+
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${manrope.variable}`}>
       <body>
         <SmoothScroll>
           <CustomCursor />
-          <Header />
+          <Header navItems={navItems} />
           <main>{children}</main>
           <Footer />
         </SmoothScroll>

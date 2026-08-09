@@ -3,14 +3,19 @@ import Link from "next/link";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/projects";
+import type { Project } from "@/data/projects";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Selected Work",
   description: "A selection of interior design, renovation and design & build projects by Elpis.co.",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
+
   return (
     <>
       <section data-nav-theme="light" style={{ background: "var(--warm-white)", paddingTop: "calc(var(--header-h) + clamp(48px, 10vw, 96px))", paddingBottom: "clamp(48px, 8vw, 88px)" }}>
@@ -32,7 +37,7 @@ function ProjectRow({
   index,
   layout,
 }: {
-  project: (typeof projects)[number];
+  project: Project;
   index: number;
   layout: 0 | 1 | 2;
 }) {

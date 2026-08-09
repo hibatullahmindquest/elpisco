@@ -1,5 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { s3Storage } from "@payloadcms/storage-s3";
 import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
@@ -7,6 +8,9 @@ import sharp from "sharp";
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
+import { Projects } from "./collections/Projects";
+import { Pages } from "./collections/Pages";
+import { Navigation } from "./globals/Navigation";
 import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
@@ -19,7 +23,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname, "app/(payload)"),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Projects, Pages],
+  globals: [Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -32,5 +37,25 @@ export default buildConfig({
     prodMigrations: migrations,
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    // Supabase Storage (S3-compatible) for uploads — Vercel's serverless
+    // functions have no persistent local disk. Only activates once the
+    // S3_* env vars are set; falls back to local disk otherwise (local dev).
+    s3Storage({
+      enabled: Boolean(process.env.S3_BUCKET),
+      bucket: process.env.S3_BUCKET || "",
+      collections: {
+        media: true,
+      },
+      config: {
+        endpoint: process.env.S3_ENDPOINT,
+        region: process.env.S3_REGION || "auto",
+        forcePathStyle: true,
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+        },
+      },
+    }),
+  ],
 });

@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import type { NavItem } from "@/lib/navigation";
 
-const LINKS = [
-  { n: "01", label: "PROJECTS", href: "/projects" },
-  { n: "02", label: "STUDIO", href: "/studio" },
-  { n: "03", label: "SERVICES", href: "/services" },
-  { n: "04", label: "PROCESS", href: "/process" },
-  { n: "05", label: "CONTACT", href: "/contact" },
-];
-
-export function FullscreenMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function FullscreenMenu({
+  open,
+  onClose,
+  navItems,
+}: {
+  open: boolean;
+  onClose: () => void;
+  navItems: NavItem[];
+}) {
+  const links = navItems.map((item, i) => ({ n: String(i + 1).padStart(2, "0"), ...item }));
   const panelRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -100,7 +102,7 @@ export function FullscreenMenu({ open, onClose }: { open: boolean; onClose: () =
       <div className="container" style={{ width: "100%" }}>
         <nav aria-label="Primary">
           <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {LINKS.map((item, i) => (
+            {links.map((item, i) => (
               <li key={item.href} style={{ overflow: "hidden" }} data-menu-item>
                 <Link
                   href={item.href}

@@ -6,17 +6,15 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ProjectMeta } from "@/components/ui/ProjectMeta";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
-import { getProject, projects } from "@/data/projects";
+import { getProject, getProjects } from "@/lib/projects";
+
+export const dynamic = "force-dynamic";
 
 type Params = { slug: string };
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return {};
   return {
     title: project.title,
@@ -26,9 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function ProjectDetailPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
 
+  const projects = await getProjects();
   const index = projects.findIndex((p) => p.slug === slug);
   const next = projects[(index + 1) % projects.length];
 

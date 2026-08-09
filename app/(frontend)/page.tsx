@@ -7,15 +7,19 @@ import { Craft } from "@/components/home/Craft";
 import { Process } from "@/components/home/Process";
 import { Marquee } from "@/components/home/Marquee";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/projects";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const projects = await getProjects();
+
   return (
     <>
       <Hero />
       <Intro />
-      <FeaturedProject project={projects[0]} index={1} variant="a" />
-      <FeaturedProject project={projects[1]} index={2} variant="b" />
+      {projects[0] && <FeaturedProject project={projects[0]} index={1} variant="a" />}
+      {projects[1] && <FeaturedProject project={projects[1]} index={2} variant="b" />}
       <Philosophy />
       <Services />
       <Craft />

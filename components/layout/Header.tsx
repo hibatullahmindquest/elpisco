@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FullscreenMenu } from "./FullscreenMenu";
+import type { NavItem } from "@/lib/navigation";
 
-export function Header() {
+export function Header({ navItems }: { navItems: NavItem[] }) {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -99,7 +100,7 @@ export function Header() {
         </div>
       </header>
 
-      <FullscreenMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <FullscreenMenu open={menuOpen} onClose={() => setMenuOpen(false)} navItems={navItems} />
     </>
   );
 }
