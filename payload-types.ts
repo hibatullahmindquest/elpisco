@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     projects: Project;
     pages: Page;
+    redirects: Redirect;
+    enquiries: Enquiry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -249,6 +253,49 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  /**
+   * The old path to redirect from, e.g. /old-page
+   */
+  fromPath: string;
+  /**
+   * Where to send visitors, e.g. /services or a full https:// URL
+   */
+  toPath: string;
+  type?: ('permanent' | 'temporary') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Submissions from the site's contact form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries".
+ */
+export interface Enquiry {
+  id: number;
+  status?: ('new' | 'contacted' | 'closed') | null;
+  name: string;
+  email: string;
+  phone?: string | null;
+  location?: string | null;
+  projectType?: ('Interior Design' | 'Renovation' | 'Design & Build' | 'Not Sure Yet') | null;
+  propertyType?: string | null;
+  budget?: string | null;
+  timing?: string | null;
+  details?: string | null;
+  /**
+   * Honeypot field — should always be blank. Not shown to real visitors.
+   */
+  company?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -286,6 +333,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'redirects';
+        value: number | Redirect;
+      } | null)
+    | ({
+        relationTo: 'enquiries';
+        value: number | Enquiry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -422,6 +477,36 @@ export interface PagesSelect<T extends boolean = true> {
         metaDescription?: T;
         ogImage?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  fromPath?: T;
+  toPath?: T;
+  type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries_select".
+ */
+export interface EnquiriesSelect<T extends boolean = true> {
+  status?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  location?: T;
+  projectType?: T;
+  propertyType?: T;
+  budget?: T;
+  timing?: T;
+  details?: T;
+  company?: T;
   updatedAt?: T;
   createdAt?: T;
 }

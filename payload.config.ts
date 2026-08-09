@@ -10,6 +10,8 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Pages } from "./collections/Pages";
+import { Redirects } from "./collections/Redirects";
+import { Enquiries } from "./collections/Enquiries";
 import { Navigation } from "./globals/Navigation";
 import { SiteSettings } from "./globals/SiteSettings";
 import { SEO } from "./globals/SEO";
@@ -26,7 +28,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname, "app/(payload)"),
     },
   },
-  collections: [Users, Media, Projects, Pages],
+  collections: [Users, Media, Projects, Pages, Redirects, Enquiries],
   globals: [Navigation, SiteSettings, SEO, Tracking],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
