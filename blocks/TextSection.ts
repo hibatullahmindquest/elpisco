@@ -35,6 +35,14 @@ export const TextSectionBlock: Block = {
       admin: { description: "For \"Feature\" emphasis, separate lines with a | character." },
     },
     {
+      name: "headlineAccent",
+      type: "text",
+      admin: {
+        description:
+          "Optional second headline shown in the accent colour directly below the main headline (for \"Feature\" emphasis, separate lines with |).",
+      },
+    },
+    {
       name: "body",
       type: "textarea",
       admin: { description: "Separate paragraphs with a blank line." },

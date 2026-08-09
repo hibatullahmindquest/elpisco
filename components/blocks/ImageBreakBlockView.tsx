@@ -1,4 +1,5 @@
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 import type { Media } from "@/payload-types";
 
 function mediaUrl(value: number | Media | null | undefined): string {
@@ -8,19 +9,24 @@ function mediaUrl(value: number | Media | null | undefined): string {
 
 export function ImageBreakBlockView({
   image,
+  fallbackImageUrl,
   alt,
   aspectRatio,
 }: {
   image?: number | Media | null;
+  fallbackImageUrl?: string | null;
   alt?: string | null;
   aspectRatio?: string | null;
 }) {
-  const src = mediaUrl(image);
-  if (!src) return null;
+  const src = mediaUrl(image) || fallbackImageUrl || "";
 
   return (
     <section data-nav-theme="light" style={{ background: "var(--soft-white)" }}>
-      <ParallaxImage src={src} alt={alt ?? ""} aspect={aspectRatio ?? "21 / 9"} sizes="100vw" />
+      {src ? (
+        <ParallaxImage src={src} alt={alt ?? ""} aspect={aspectRatio ?? "21 / 9"} sizes="100vw" />
+      ) : (
+        <ImagePlaceholder aspect={aspectRatio ?? "21 / 9"} />
+      )}
     </section>
   );
 }

@@ -16,6 +16,13 @@ export const ImageTextBlock: Block = {
       ],
     },
     { name: "image", type: "upload", relationTo: "media" },
+    {
+      name: "fallbackImageUrl",
+      type: "text",
+      admin: {
+        description: "Local/static image path used until a real photo is uploaded via the Image field above, e.g. /images/details/material-detail.jpg",
+      },
+    },
     { name: "label", type: "text" },
     { name: "headline", type: "text", required: true },
     { name: "body", type: "textarea" },

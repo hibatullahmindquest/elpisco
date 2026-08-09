@@ -283,7 +283,11 @@ export interface Page {
             blockType: 'hero';
           }
         | {
-            image: number | Media;
+            image?: (number | null) | Media;
+            /**
+             * Local/static image path used until a real photo is uploaded via the Image field above, e.g. /images/studio/studio-atmosphere.jpg
+             */
+            fallbackImageUrl?: string | null;
             alt: string;
             aspectRatio?: ('21 / 9' | '16 / 9' | '4 / 3') | null;
             id?: string | null;
@@ -302,6 +306,10 @@ export interface Page {
              * For "Feature" emphasis, separate lines with a | character.
              */
             headline?: string | null;
+            /**
+             * Optional second headline shown in the accent colour directly below the main headline (for "Feature" emphasis, separate lines with |).
+             */
+            headlineAccent?: string | null;
             /**
              * Separate paragraphs with a blank line.
              */
@@ -484,6 +492,10 @@ export interface Page {
             background?: ('warm-white' | 'soft-white' | 'navy') | null;
             imagePosition?: ('left' | 'right') | null;
             image?: (number | null) | Media;
+            /**
+             * Local/static image path used until a real photo is uploaded via the Image field above, e.g. /images/details/material-detail.jpg
+             */
+            fallbackImageUrl?: string | null;
             label?: string | null;
             headline: string;
             body?: string | null;
@@ -1039,6 +1051,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               image?: T;
+              fallbackImageUrl?: T;
               alt?: T;
               aspectRatio?: T;
               id?: T;
@@ -1052,6 +1065,7 @@ export interface PagesSelect<T extends boolean = true> {
               emphasis?: T;
               align?: T;
               headline?: T;
+              headlineAccent?: T;
               body?: T;
               ctaLabel?: T;
               ctaHref?: T;
@@ -1200,6 +1214,7 @@ export interface PagesSelect<T extends boolean = true> {
               background?: T;
               imagePosition?: T;
               image?: T;
+              fallbackImageUrl?: T;
               label?: T;
               headline?: T;
               body?: T;

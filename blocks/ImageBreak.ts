@@ -8,7 +8,13 @@ export const ImageBreakBlock: Block = {
       name: "image",
       type: "upload",
       relationTo: "media",
-      required: true,
+    },
+    {
+      name: "fallbackImageUrl",
+      type: "text",
+      admin: {
+        description: "Local/static image path used until a real photo is uploaded via the Image field above, e.g. /images/studio/studio-atmosphere.jpg",
+      },
     },
     {
       name: "alt",

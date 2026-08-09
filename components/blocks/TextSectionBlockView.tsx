@@ -9,6 +9,7 @@ export function TextSectionBlockView({
   emphasis,
   align,
   headline,
+  headlineAccent,
   body,
   stats,
   statsDisclaimer,
@@ -20,6 +21,7 @@ export function TextSectionBlockView({
   emphasis?: string | null;
   align?: string | null;
   headline?: string | null;
+  headlineAccent?: string | null;
   body?: string | null;
   stats?: { label: string; value: string }[] | null;
   statsDisclaimer?: string | null;
@@ -28,6 +30,7 @@ export function TextSectionBlockView({
 }) {
   const dark = isDarkBackground(background);
   const headingColor = dark ? "var(--soft-white)" : "var(--ink)";
+  const accentColor = dark ? "var(--champagne)" : "var(--champagne-ink)";
   const bodyColor = dark ? "rgba(244,241,234,0.65)" : undefined;
   const paragraphs = toParagraphs(body);
   const centered = align === "center";
@@ -50,6 +53,25 @@ export function TextSectionBlockView({
     )
   );
 
+  const accentEl = headlineAccent && (
+    emphasis === "feature" ? (
+      <RevealText
+        as="h2"
+        className="h-section"
+        lines={headlineAccent.split("|").map((l) => l.trim())}
+        style={{ color: accentColor, marginTop: "0.15em", textAlign: centered ? "center" : undefined }}
+        delay={0.15}
+      />
+    ) : (
+      <h2
+        className="h-medium"
+        style={{ color: accentColor, marginTop: 4, textAlign: centered ? "center" : undefined }}
+      >
+        {headlineAccent}
+      </h2>
+    )
+  );
+
   if (centered) {
     return (
       <section
@@ -63,6 +85,7 @@ export function TextSectionBlockView({
             </div>
           )}
           {headlineEl}
+          {accentEl}
           {paragraphs.map((p, i) => (
             <p
               key={i}
@@ -98,6 +121,7 @@ export function TextSectionBlockView({
         <div className="col-line-1-5">
           {label && <SectionLabel theme={dark ? "dark" : "light"}>{label}</SectionLabel>}
           {headlineEl}
+          {accentEl}
         </div>
         <div className="col-line-7-end">
           {paragraphs.map((p, i) => (

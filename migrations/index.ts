@@ -19,6 +19,8 @@ import * as migration_20260809_094045_seed_careers_page_content from './20260809
 import * as migration_20260809_094100_seed_services_page_content from './20260809_094100_seed_services_page_content';
 import * as migration_20260809_094115_seed_contact_page_content from './20260809_094115_seed_contact_page_content';
 import * as migration_20260809_094130_seed_home_page_content from './20260809_094130_seed_home_page_content';
+import * as migration_20260809_095403_restore_images_and_headline_accent from './20260809_095403_restore_images_and_headline_accent';
+import * as migration_20260809_095500_restore_images_and_two_tone_headlines from './20260809_095500_restore_images_and_two_tone_headlines';
 
 export const migrations = [
   {
@@ -125,5 +127,15 @@ export const migrations = [
     up: migration_20260809_094130_seed_home_page_content.up,
     down: migration_20260809_094130_seed_home_page_content.down,
     name: '20260809_094130_seed_home_page_content',
+  },
+  {
+    up: migration_20260809_095403_restore_images_and_headline_accent.up,
+    down: migration_20260809_095403_restore_images_and_headline_accent.down,
+    name: '20260809_095403_restore_images_and_headline_accent',
+  },
+  {
+    up: migration_20260809_095500_restore_images_and_two_tone_headlines.up,
+    down: migration_20260809_095500_restore_images_and_two_tone_headlines.down,
+    name: '20260809_095500_restore_images_and_two_tone_headlines',
   },
 ];

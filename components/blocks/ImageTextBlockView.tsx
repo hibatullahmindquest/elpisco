@@ -1,6 +1,7 @@
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 import { resolveBackground, isDarkBackground } from "./shared";
 import type { Media } from "@/payload-types";
 
@@ -13,6 +14,7 @@ export function ImageTextBlockView({
   background,
   imagePosition,
   image,
+  fallbackImageUrl,
   label,
   headline,
   body,
@@ -25,6 +27,7 @@ export function ImageTextBlockView({
   background?: string | null;
   imagePosition?: string | null;
   image?: number | Media | null;
+  fallbackImageUrl?: string | null;
   label?: string | null;
   headline: string;
   body?: string | null;
@@ -36,17 +39,19 @@ export function ImageTextBlockView({
 }) {
   const dark = isDarkBackground(background);
   const imageLeft = imagePosition !== "right";
-  const src = mediaUrl(image);
+  const src = mediaUrl(image) || fallbackImageUrl || "";
 
   return (
     <section data-nav-theme={dark ? "dark" : "light"} style={{ background: resolveBackground(background), paddingBlock: "clamp(56px, 9vw, 100px)" }}>
       <div className="container grid-12" style={{ alignItems: "center", rowGap: 40 }}>
-        {src && (
-          <div className={imageLeft ? "col-line-1-6" : "col-line-7-end"} style={{ order: imageLeft ? 1 : 2 }}>
+        <div className={imageLeft ? "col-line-1-6" : "col-line-7-end"} style={{ order: imageLeft ? 1 : 2 }}>
+          {src ? (
             <ParallaxImage src={src} alt={`${headline} — Elpis.co`} aspect="4 / 3" sizes="(max-width: 900px) 100vw, 48vw" />
-          </div>
-        )}
-        <div className={src ? (imageLeft ? "col-line-8-end" : "col-line-1-5") : undefined} style={{ order: imageLeft ? 2 : 1, gridColumn: src ? undefined : "1 / -1" }}>
+          ) : (
+            <ImagePlaceholder dark={dark} />
+          )}
+        </div>
+        <div className={imageLeft ? "col-line-8-end" : "col-line-1-5"} style={{ order: imageLeft ? 2 : 1 }}>
           {label && <SectionLabel theme={dark ? "dark" : "light"}>{label}</SectionLabel>}
           <h2 className="h-medium" style={{ color: dark ? "var(--soft-white)" : "var(--ink)", marginTop: 12 }}>
             {headline}
