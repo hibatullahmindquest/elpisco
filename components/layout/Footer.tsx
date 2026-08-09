@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import type { SiteSettings } from "@/lib/siteSettings";
 
@@ -53,10 +52,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
         <div
           style={{
             marginTop: "clamp(24px, 6vw, 56px)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: 24,
             borderTop: "1px solid var(--line-on-navy)",
             paddingTop: 24,
           }}
@@ -64,9 +59,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           <p style={{ color: "rgba(244,241,234,0.5)", fontSize: 12, letterSpacing: "0.05em" }}>
             &copy; {year} {settings.siteName}
           </p>
-          <Link href="/" className="label" style={{ color: "rgba(244,241,234,0.5)" }}>
-            BACK TO TOP
-          </Link>
         </div>
       </div>
 

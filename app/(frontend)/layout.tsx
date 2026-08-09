@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { BackToTopButton } from "@/components/ui/BackToTopButton";
 import { getNavigation } from "@/lib/navigation";
 import { getSiteSettings } from "@/lib/siteSettings";
 import { getRootMetadata, getOrganizationJsonLd } from "@/lib/seo";
@@ -122,6 +123,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
           <main>{children}</main>
           <Footer settings={settings} />
+          <BackToTopButton />
         </SmoothScroll>
         <TrackingBodyEnd settings={tracking} />
       </body>
