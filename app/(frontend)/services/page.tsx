@@ -179,7 +179,7 @@ export default function ServicesPage() {
               )}
 
               <div style={{ marginTop: 28 }}>
-                <AnimatedLink href="/contact">START A PROJECT</AnimatedLink>
+                <AnimatedLink href="/start-a-project">START A PROJECT</AnimatedLink>
               </div>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function ServicesPage() {
             appropriate scope during the initial consultation.
           </p>
           <div style={{ marginTop: 40 }}>
-            <AnimatedLink href="/contact" variant="solid-invert">
+            <AnimatedLink href="/start-a-project" variant="solid-invert">
               DISCUSS YOUR PROJECT
             </AnimatedLink>
           </div>

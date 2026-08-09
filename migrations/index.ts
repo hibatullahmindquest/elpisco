@@ -5,6 +5,7 @@ import * as migration_20260809_022715_add_seo from './20260809_022715_add_seo';
 import * as migration_20260809_030052_add_tracking from './20260809_030052_add_tracking';
 import * as migration_20260809_043924_add_redirects_enquiries from './20260809_043924_add_redirects_enquiries';
 import * as migration_20260809_053152_add_faq_testimonials_credentials_careers from './20260809_053152_add_faq_testimonials_credentials_careers';
+import * as migration_20260809_064509_extend_enquiries_for_assessment_wizard from './20260809_064509_extend_enquiries_for_assessment_wizard';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20260809_053152_add_faq_testimonials_credentials_careers.up,
     down: migration_20260809_053152_add_faq_testimonials_credentials_careers.down,
-    name: '20260809_053152_add_faq_testimonials_credentials_careers'
+    name: '20260809_053152_add_faq_testimonials_credentials_careers',
+  },
+  {
+    up: migration_20260809_064509_extend_enquiries_for_assessment_wizard.up,
+    down: migration_20260809_064509_extend_enquiries_for_assessment_wizard.down,
+    name: '20260809_064509_extend_enquiries_for_assessment_wizard'
   },
 ];

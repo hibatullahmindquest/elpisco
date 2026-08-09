@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/why-elpis",
     "/faq",
     "/contact",
+    "/start-a-project",
     "/careers",
   ].map((path) => ({
     url: `${BASE_URL}${path}`,

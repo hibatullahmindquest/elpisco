@@ -157,7 +157,7 @@ export default function ProcessPage() {
         <div className="container">
           <RevealText as="h2" className="h-section" lines={["READY TO", "BEGIN?"]} style={{ color: "var(--soft-white)", textAlign: "center" }} />
           <div style={{ marginTop: 40 }}>
-            <AnimatedLink href="/contact" variant="solid-invert">
+            <AnimatedLink href="/start-a-project" variant="solid-invert">
               START A PROJECT
             </AnimatedLink>
           </div>

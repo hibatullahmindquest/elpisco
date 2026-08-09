@@ -29,6 +29,7 @@ export async function GET() {
     `- [Why Elpis](${SITE_URL}/why-elpis)`,
     `- [FAQ](${SITE_URL}/faq)`,
     `- [Contact](${SITE_URL}/contact)`,
+    `- [Start a Project](${SITE_URL}/start-a-project)`,
     `- [Careers](${SITE_URL}/careers)`,
     "",
     "## Selected Work",

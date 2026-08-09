@@ -47,7 +47,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
         </div>
 
         <div style={{ marginTop: 64 }}>
-          <AnimatedLink href="/contact">START A PROJECT</AnimatedLink>
+          <AnimatedLink href="/start-a-project">START A PROJECT</AnimatedLink>
         </div>
 
         <div

@@ -278,7 +278,7 @@ export interface Redirect {
   createdAt: string;
 }
 /**
- * Submissions from the site's contact form.
+ * Submissions from the Start a Project assessment and the legacy contact form.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "enquiries".
@@ -286,15 +286,40 @@ export interface Redirect {
 export interface Enquiry {
   id: number;
   status?: ('new' | 'contacted' | 'closed') | null;
+  source?: ('start-a-project' | 'contact-form') | null;
+  /**
+   * Internal-only scoring signal — never shown to the visitor.
+   */
+  leadTier?: ('priority' | 'qualified' | 'review' | 'low-fit') | null;
+  /**
+   * Internal-only scoring signal — never shown to the visitor.
+   */
+  leadScore?: number | null;
   name: string;
   email: string;
   phone?: string | null;
+  preferredContactMethod?: string | null;
   location?: string | null;
   projectType?: ('Interior Design' | 'Renovation' | 'Design & Build' | 'Not Sure Yet') | null;
   propertyType?: string | null;
+  builtUpRange?: string | null;
+  services?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  areas?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  transformationLevel?: string | null;
   budget?: string | null;
   timing?: string | null;
   details?: string | null;
+  consent?: boolean | null;
   /**
    * Honeypot field — should always be blank. Not shown to real visitors.
    */
@@ -630,15 +655,34 @@ export interface RedirectsSelect<T extends boolean = true> {
  */
 export interface EnquiriesSelect<T extends boolean = true> {
   status?: T;
+  source?: T;
+  leadTier?: T;
+  leadScore?: T;
   name?: T;
   email?: T;
   phone?: T;
+  preferredContactMethod?: T;
   location?: T;
   projectType?: T;
   propertyType?: T;
+  builtUpRange?: T;
+  services?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  areas?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  transformationLevel?: T;
   budget?: T;
   timing?: T;
   details?: T;
+  consent?: T;
   company?: T;
   updatedAt?: T;
   createdAt?: T;

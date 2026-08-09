@@ -51,7 +51,7 @@ export async function FinalCTA() {
             flexWrap: "wrap",
           }}
         >
-          <AnimatedLink href="/contact" variant="solid-invert">
+          <AnimatedLink href="/start-a-project" variant="solid-invert">
             BOOK A CONSULTATION
           </AnimatedLink>
           <AnimatedLink href={settings.whatsappUrl} external style={{ color: "var(--soft-white)" }}>

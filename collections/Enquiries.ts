@@ -12,8 +12,8 @@ export const Enquiries: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["name", "email", "projectType", "status", "createdAt"],
-    description: "Submissions from the site's contact form.",
+    defaultColumns: ["name", "email", "source", "leadTier", "status", "createdAt"],
+    description: "Submissions from the Start a Project assessment and the legacy contact form.",
   },
   fields: [
     {
@@ -27,6 +27,40 @@ export const Enquiries: CollectionConfig = {
       ],
       admin: {
         position: "sidebar",
+      },
+    },
+    {
+      name: "source",
+      type: "select",
+      defaultValue: "start-a-project",
+      options: [
+        { label: "Start a Project assessment", value: "start-a-project" },
+        { label: "Contact form", value: "contact-form" },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
+    {
+      name: "leadTier",
+      type: "select",
+      options: [
+        { label: "Priority", value: "priority" },
+        { label: "Qualified", value: "qualified" },
+        { label: "Review", value: "review" },
+        { label: "Low fit", value: "low-fit" },
+      ],
+      admin: {
+        position: "sidebar",
+        description: "Internal-only scoring signal — never shown to the visitor.",
+      },
+    },
+    {
+      name: "leadScore",
+      type: "number",
+      admin: {
+        position: "sidebar",
+        description: "Internal-only scoring signal — never shown to the visitor.",
       },
     },
     {
@@ -44,10 +78,18 @@ export const Enquiries: CollectionConfig = {
       type: "text",
     },
     {
+      name: "preferredContactMethod",
+      type: "text",
+    },
+    {
       name: "location",
       type: "text",
     },
     {
+      // Legacy single-select from the old contact form. The Start a Project
+      // wizard uses the richer `services` array instead — kept here
+      // unused-but-intact rather than dropped, to avoid an ambiguous
+      // enum-rename prompt in `payload migrate:create`.
       name: "projectType",
       type: "select",
       options: [
@@ -62,6 +104,36 @@ export const Enquiries: CollectionConfig = {
       type: "text",
     },
     {
+      name: "builtUpRange",
+      type: "text",
+    },
+    {
+      name: "services",
+      type: "array",
+      fields: [
+        {
+          name: "value",
+          type: "text",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "areas",
+      type: "array",
+      fields: [
+        {
+          name: "value",
+          type: "text",
+          required: true,
+        },
+      ],
+    },
+    {
+      name: "transformationLevel",
+      type: "text",
+    },
+    {
       name: "budget",
       type: "text",
     },
@@ -72,6 +144,11 @@ export const Enquiries: CollectionConfig = {
     {
       name: "details",
       type: "textarea",
+    },
+    {
+      name: "consent",
+      type: "checkbox",
+      defaultValue: false,
     },
     {
       // Honeypot: real visitors never fill this (it's hidden in the UI).

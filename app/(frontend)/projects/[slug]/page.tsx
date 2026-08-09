@@ -117,7 +117,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
               {next.title}
             </Link>
           </div>
-          <AnimatedLink href="/contact" variant="solid-invert">START A PROJECT</AnimatedLink>
+          <AnimatedLink href="/start-a-project" variant="solid-invert">START A PROJECT</AnimatedLink>
         </div>
       </section>
     </>

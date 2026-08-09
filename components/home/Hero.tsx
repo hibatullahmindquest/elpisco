@@ -88,7 +88,7 @@ export function Hero() {
             gap: "clamp(20px, 3vw, 40px)",
           }}
         >
-          <AnimatedLink href="/contact" variant="solid-invert">
+          <AnimatedLink href="/start-a-project" variant="solid-invert">
             BOOK A CONSULTATION
           </AnimatedLink>
           <AnimatedLink href="/projects" style={{ color: "var(--soft-white)" }}>

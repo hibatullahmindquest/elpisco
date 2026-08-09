@@ -488,3 +488,110 @@ html.has-custom-cursor * {
   outline: 2px solid var(--champagne);
   outline-offset: 1px;
 }
+
+/* Dark-background field variant — Project Assessment contact step */
+.field-dark label {
+  color: var(--champagne);
+}
+
+.field-dark input,
+.field-dark select,
+.field-dark textarea {
+  background: transparent;
+  color: var(--soft-white);
+  border-color: var(--line-on-navy);
+}
+
+.field-dark select option {
+  color: var(--ink);
+}
+
+.field-dark input::placeholder,
+.field-dark textarea::placeholder {
+  color: rgba(244, 241, 234, 0.4);
+}
+
+.field-dark input:focus,
+.field-dark select:focus,
+.field-dark textarea:focus {
+  border-color: var(--champagne);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Project Assessment wizard — option rows */
+.assessment-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 4px;
+  border-top: 1px solid var(--line-on-navy);
+  text-align: left;
+  color: var(--soft-white);
+  transition: border-color 0.3s var(--ease-premium), padding-left 0.3s var(--ease-premium);
+}
+
+.assessment-option:last-child {
+  border-bottom: 1px solid var(--line-on-navy);
+}
+
+.assessment-option:hover {
+  border-top-color: var(--champagne);
+  padding-left: 12px;
+}
+
+.assessment-option:has(:focus-visible) {
+  outline: 2px solid var(--champagne);
+  outline-offset: 4px;
+}
+
+.assessment-option.is-selected {
+  border-top-color: var(--champagne);
+}
+
+.assessment-option-mark {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(244, 241, 234, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s var(--ease-premium), background 0.3s var(--ease-premium);
+}
+
+.assessment-option-mark--round {
+  border-radius: 999px;
+}
+
+.assessment-option.is-selected .assessment-option-mark {
+  border-color: var(--champagne);
+  background: var(--champagne);
+}
+
+.assessment-option-mark svg {
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-premium);
+}
+
+.assessment-option.is-selected .assessment-option-mark svg {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .assessment-option:hover {
+    padding-left: 4px;
+  }
+}
