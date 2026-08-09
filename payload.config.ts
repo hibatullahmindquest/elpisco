@@ -21,7 +21,6 @@ import { Navigation } from "./globals/Navigation";
 import { SiteSettings } from "./globals/SiteSettings";
 import { SEO } from "./globals/SEO";
 import { Tracking } from "./globals/Tracking";
-import { Homepage } from "./globals/Homepage";
 import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
@@ -47,7 +46,7 @@ export default buildConfig({
     Careers,
     Founders,
   ],
-  globals: [Navigation, SiteSettings, SEO, Tracking, Homepage],
+  globals: [Navigation, SiteSettings, SEO, Tracking],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

@@ -1,28 +1,93 @@
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { resolveBackground, isDarkBackground, toParagraphs } from "./shared";
 
 export function TextSectionBlockView({
   background,
   label,
   emphasis,
+  align,
   headline,
   body,
   stats,
   statsDisclaimer,
+  ctaLabel,
+  ctaHref,
 }: {
   background?: string | null;
   label?: string | null;
   emphasis?: string | null;
+  align?: string | null;
   headline?: string | null;
   body?: string | null;
   stats?: { label: string; value: string }[] | null;
   statsDisclaimer?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
 }) {
   const dark = isDarkBackground(background);
   const headingColor = dark ? "var(--soft-white)" : "var(--ink)";
   const bodyColor = dark ? "rgba(244,241,234,0.65)" : undefined;
   const paragraphs = toParagraphs(body);
+  const centered = align === "center";
+
+  const headlineEl = headline && (
+    emphasis === "feature" ? (
+      <RevealText
+        as="h2"
+        className="h-section"
+        lines={headline.split("|").map((l) => l.trim())}
+        style={{ color: headingColor, marginTop: label ? 14 : 0, textAlign: centered ? "center" : undefined }}
+      />
+    ) : (
+      <h2
+        className="h-medium"
+        style={{ color: headingColor, marginTop: label ? 14 : 0, textAlign: centered ? "center" : undefined }}
+      >
+        {headline}
+      </h2>
+    )
+  );
+
+  if (centered) {
+    return (
+      <section
+        data-nav-theme={dark ? "dark" : "light"}
+        style={{ background: resolveBackground(background), paddingBlock: "clamp(96px, 16vw, 220px)" }}
+      >
+        <div className="container" style={{ textAlign: "center" }}>
+          {label && (
+            <div style={{ display: "inline-block" }}>
+              <SectionLabel theme={dark ? "dark" : "light"}>{label}</SectionLabel>
+            </div>
+          )}
+          {headlineEl}
+          {paragraphs.map((p, i) => (
+            <p
+              key={i}
+              className="body-copy"
+              style={{
+                marginInline: "auto",
+                marginTop: i === 0 ? "clamp(40px, 6vw, 64px)" : 12,
+                maxWidth: 480,
+                color: bodyColor,
+              }}
+            >
+              {p}
+            </p>
+          ))}
+          {ctaLabel && ctaHref && (
+            <div style={{ marginTop: 32 }}>
+              <AnimatedLink href={ctaHref} style={dark ? { color: "var(--soft-white)" } : undefined}>
+                {ctaLabel}
+              </AnimatedLink>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -32,19 +97,7 @@ export function TextSectionBlockView({
       <div className="container grid-12" style={{ rowGap: 56 }}>
         <div className="col-line-1-5">
           {label && <SectionLabel theme={dark ? "dark" : "light"}>{label}</SectionLabel>}
-          {headline &&
-            (emphasis === "feature" ? (
-              <RevealText
-                as="h2"
-                className="h-section"
-                lines={headline.split("|").map((l) => l.trim())}
-                style={{ color: headingColor, marginTop: label ? 14 : 0 }}
-              />
-            ) : (
-              <h2 className="h-medium" style={{ color: headingColor, marginTop: label ? 14 : 0 }}>
-                {headline}
-              </h2>
-            ))}
+          {headlineEl}
         </div>
         <div className="col-line-7-end">
           {paragraphs.map((p, i) => (
@@ -56,6 +109,13 @@ export function TextSectionBlockView({
               {p}
             </p>
           ))}
+          {ctaLabel && ctaHref && (
+            <div style={{ marginTop: 32, textAlign: "right" }}>
+              <AnimatedLink href={ctaHref} style={dark ? { color: "var(--soft-white)" } : undefined}>
+                {ctaLabel}
+              </AnimatedLink>
+            </div>
+          )}
         </div>
         {stats && stats.length > 0 && (
           <div className="col-line-1-6" style={{ marginTop: 8 }}>

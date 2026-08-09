@@ -5,7 +5,9 @@ import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getOpenCareers } from "@/lib/careers";
 import { getSiteSettings } from "@/lib/siteSettings";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,17 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 ]);
 
 export default async function CareersPage() {
+  const cmsPage = await getPageByPath("/careers");
+
+  if (cmsPage?.layout && cmsPage.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={cmsPage.layout} />
+      </>
+    );
+  }
+
   const [roles, settings] = await Promise.all([getOpenCareers(), getSiteSettings()]);
 
   return (

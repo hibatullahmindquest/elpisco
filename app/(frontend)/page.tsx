@@ -11,8 +11,9 @@ import { Marquee } from "@/components/home/Marquee";
 import { Testimonials } from "@/components/home/Testimonials";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { getProjects } from "@/lib/projects";
-import { getHomepageSettings } from "@/lib/homepage";
+import { getPageByPath } from "@/lib/pages";
 import { getPageMetadata } from "@/lib/seo";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -25,11 +26,27 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [projects, homepage] = await Promise.all([getProjects(), getHomepageSettings()]);
+  const page = await getPageByPath("/");
+
+  if (page?.layout && page.layout.length > 0) {
+    return <RenderBlocks blocks={page.layout} />;
+  }
+
+  const projects = await getProjects();
 
   return (
     <>
-      <Hero imageUrl={homepage.heroImageUrl} imageAlt={homepage.heroImageAlt} />
+      <Hero
+        imageUrl="/images/hero/main.jpg"
+        imageAlt="Architectural interior with natural light and considered material palette"
+        eyebrow="INTERIOR DESIGN · RENOVATION · DESIGN & BUILD"
+        headlineLines={["SPACES", "SHAPED", "AROUND YOU."]}
+        primaryCtaLabel="BOOK A CONSULTATION"
+        primaryCtaHref="/start-a-project"
+        secondaryCtaLabel="VIEW SELECTED WORK"
+        secondaryCtaHref="/projects"
+        locationLine="SHAH ALAM · MALAYSIA"
+      />
       <Intro />
       {projects[0] && <FeaturedProject project={projects[0]} index={1} variant="a" />}
       {projects[1] && <FeaturedProject project={projects[1]} index={2} variant="b" />}

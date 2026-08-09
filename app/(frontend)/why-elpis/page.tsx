@@ -4,7 +4,9 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getTestimonials } from "@/lib/testimonials";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +57,17 @@ const REASONS = [
 ];
 
 export default async function WhyElpisPage() {
+  const page = await getPageByPath("/why-elpis");
+
+  if (page?.layout && page.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={page.layout} />
+      </>
+    );
+  }
+
   const testimonials = await getTestimonials();
 
   return (

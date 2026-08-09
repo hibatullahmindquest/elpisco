@@ -4,7 +4,9 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Accordion } from "@/components/ui/Accordion";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getFaqs } from "@/lib/faq";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +27,23 @@ function groupByCategory(faqs: { question: string; answer: string; category: str
   return Array.from(groups.entries());
 }
 
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "FAQ", path: "/faq" },
+]);
+
 export default async function FaqPage() {
+  const cmsPage = await getPageByPath("/faq");
+
+  if (cmsPage?.layout && cmsPage.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={cmsPage.layout} />
+      </>
+    );
+  }
+
   const faqs = await getFaqs();
   const groups = groupByCategory(faqs);
 
@@ -44,11 +62,6 @@ export default async function FaqPage() {
           })),
         }
       : null;
-
-  const breadcrumbJsonLd = getBreadcrumbJsonLd([
-    { name: "Home", path: "/" },
-    { name: "FAQ", path: "/faq" },
-  ]);
 
   return (
     <>

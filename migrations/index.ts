@@ -9,6 +9,16 @@ import * as migration_20260809_064509_extend_enquiries_for_assessment_wizard fro
 import * as migration_20260809_073329_add_founders_and_homepage from './20260809_073329_add_founders_and_homepage';
 import * as migration_20260809_090422_add_pages_layout_blocks from './20260809_090422_add_pages_layout_blocks';
 import * as migration_20260809_091500_seed_about_page_content from './20260809_091500_seed_about_page_content';
+import * as migration_20260809_092819_remove_homepage_global from './20260809_092819_remove_homepage_global';
+import * as migration_20260809_092842_add_page_blocks_batch2 from './20260809_092842_add_page_blocks_batch2';
+import * as migration_20260809_093518_add_numbered_list_headline_cta from './20260809_093518_add_numbered_list_headline_cta';
+import * as migration_20260809_094000_seed_process_page_content from './20260809_094000_seed_process_page_content';
+import * as migration_20260809_094015_seed_why_elpis_page_content from './20260809_094015_seed_why_elpis_page_content';
+import * as migration_20260809_094030_seed_faq_page_content from './20260809_094030_seed_faq_page_content';
+import * as migration_20260809_094045_seed_careers_page_content from './20260809_094045_seed_careers_page_content';
+import * as migration_20260809_094100_seed_services_page_content from './20260809_094100_seed_services_page_content';
+import * as migration_20260809_094115_seed_contact_page_content from './20260809_094115_seed_contact_page_content';
+import * as migration_20260809_094130_seed_home_page_content from './20260809_094130_seed_home_page_content';
 
 export const migrations = [
   {
@@ -65,5 +75,55 @@ export const migrations = [
     up: migration_20260809_091500_seed_about_page_content.up,
     down: migration_20260809_091500_seed_about_page_content.down,
     name: '20260809_091500_seed_about_page_content',
+  },
+  {
+    up: migration_20260809_092819_remove_homepage_global.up,
+    down: migration_20260809_092819_remove_homepage_global.down,
+    name: '20260809_092819_remove_homepage_global',
+  },
+  {
+    up: migration_20260809_092842_add_page_blocks_batch2.up,
+    down: migration_20260809_092842_add_page_blocks_batch2.down,
+    name: '20260809_092842_add_page_blocks_batch2',
+  },
+  {
+    up: migration_20260809_093518_add_numbered_list_headline_cta.up,
+    down: migration_20260809_093518_add_numbered_list_headline_cta.down,
+    name: '20260809_093518_add_numbered_list_headline_cta',
+  },
+  {
+    up: migration_20260809_094000_seed_process_page_content.up,
+    down: migration_20260809_094000_seed_process_page_content.down,
+    name: '20260809_094000_seed_process_page_content',
+  },
+  {
+    up: migration_20260809_094015_seed_why_elpis_page_content.up,
+    down: migration_20260809_094015_seed_why_elpis_page_content.down,
+    name: '20260809_094015_seed_why_elpis_page_content',
+  },
+  {
+    up: migration_20260809_094030_seed_faq_page_content.up,
+    down: migration_20260809_094030_seed_faq_page_content.down,
+    name: '20260809_094030_seed_faq_page_content',
+  },
+  {
+    up: migration_20260809_094045_seed_careers_page_content.up,
+    down: migration_20260809_094045_seed_careers_page_content.down,
+    name: '20260809_094045_seed_careers_page_content',
+  },
+  {
+    up: migration_20260809_094100_seed_services_page_content.up,
+    down: migration_20260809_094100_seed_services_page_content.down,
+    name: '20260809_094100_seed_services_page_content',
+  },
+  {
+    up: migration_20260809_094115_seed_contact_page_content.up,
+    down: migration_20260809_094115_seed_contact_page_content.down,
+    name: '20260809_094115_seed_contact_page_content',
+  },
+  {
+    up: migration_20260809_094130_seed_home_page_content.up,
+    down: migration_20260809_094130_seed_home_page_content.down,
+    name: '20260809_094130_seed_home_page_content',
   },
 ];

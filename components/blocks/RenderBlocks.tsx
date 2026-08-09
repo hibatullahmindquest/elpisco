@@ -7,6 +7,16 @@ import { CredentialsGridBlockView } from "./CredentialsGridBlockView";
 import { SplitTextBlockView } from "./SplitTextBlockView";
 import { NumberedListBlockView } from "./NumberedListBlockView";
 import { CTABannerBlockView } from "./CTABannerBlockView";
+import { StageListBlockView } from "./StageListBlockView";
+import { LinkListBlockView } from "./LinkListBlockView";
+import { ImageTextBlockView } from "./ImageTextBlockView";
+import { TestimonialsGridBlockView } from "./TestimonialsGridBlockView";
+import { CareersListBlockView } from "./CareersListBlockView";
+import { FeaturedProjectsBlockView } from "./FeaturedProjectsBlockView";
+import { MarqueeBlockView } from "./MarqueeBlockView";
+import { HomeHeroBlockView } from "./HomeHeroBlockView";
+import { FaqAccordionBlockView } from "./FaqAccordionBlockView";
+import { ContactDetailsBlockView } from "./ContactDetailsBlockView";
 
 type LayoutBlocks = NonNullable<Page["layout"]>;
 type LayoutBlock = LayoutBlocks[number];
@@ -34,6 +44,26 @@ export function RenderBlocks({ blocks }: { blocks?: LayoutBlocks | null }) {
             return <NumberedListBlockView key={block.id} {...block} />;
           case "ctaBanner":
             return <CTABannerBlockView key={block.id} {...block} />;
+          case "stageList":
+            return <StageListBlockView key={block.id} {...block} />;
+          case "linkList":
+            return <LinkListBlockView key={block.id} {...block} />;
+          case "imageText":
+            return <ImageTextBlockView key={block.id} {...block} />;
+          case "testimonialsGrid":
+            return <TestimonialsGridBlockView key={block.id} {...block} />;
+          case "careersList":
+            return <CareersListBlockView key={block.id} {...block} />;
+          case "featuredProjects":
+            return <FeaturedProjectsBlockView key={block.id} {...block} />;
+          case "marquee":
+            return <MarqueeBlockView key={block.id} {...block} />;
+          case "homeHero":
+            return <HomeHeroBlockView key={block.id} {...block} />;
+          case "faqAccordion":
+            return <FaqAccordionBlockView key={block.id} {...block} />;
+          case "contactDetails":
+            return <ContactDetailsBlockView key={block.id} {...block} />;
           default:
             return null;
         }

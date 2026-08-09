@@ -11,6 +11,18 @@ export const NumberedListBlock: Block = {
       type: "text",
     },
     {
+      name: "headline",
+      type: "text",
+    },
+    {
+      name: "ctaLabel",
+      type: "text",
+    },
+    {
+      name: "ctaHref",
+      type: "text",
+    },
+    {
       name: "columns",
       type: "select",
       defaultValue: "2",

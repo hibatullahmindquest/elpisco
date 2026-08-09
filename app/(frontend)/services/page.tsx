@@ -4,7 +4,9 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -121,7 +123,18 @@ const SERVICES = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const cmsPage = await getPageByPath("/services");
+
+  if (cmsPage?.layout && cmsPage.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={cmsPage.layout} />
+      </>
+    );
+  }
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />

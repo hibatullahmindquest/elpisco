@@ -1,7 +1,5 @@
-const ITEM = "SELECTED WORK";
-
-export function Marquee() {
-  const row = Array.from({ length: 8 }, () => ITEM).join(" / ");
+export function Marquee({ text = "SELECTED WORK" }: { text?: string }) {
+  const row = Array.from({ length: 8 }, () => text).join(" / ");
 
   return (
     <section

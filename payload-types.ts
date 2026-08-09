@@ -110,14 +110,12 @@ export interface Config {
     'site-settings': SiteSetting;
     seo: Seo;
     tracking: Tracking;
-    homepage: Homepage;
   };
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
     tracking: TrackingSelect<false> | TrackingSelect<true>;
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -299,6 +297,7 @@ export interface Page {
              */
             label?: string | null;
             emphasis?: ('standard' | 'feature') | null;
+            align?: ('left' | 'center') | null;
             /**
              * For "Feature" emphasis, separate lines with a | character.
              */
@@ -307,6 +306,8 @@ export interface Page {
              * Separate paragraphs with a blank line.
              */
             body?: string | null;
+            ctaLabel?: string | null;
+            ctaHref?: string | null;
             /**
              * Optional — renders a small label/value grid below the body (e.g. Established, Team size).
              */
@@ -382,6 +383,9 @@ export interface Page {
         | {
             background?: ('warm-white' | 'soft-white' | 'navy') | null;
             label?: string | null;
+            headline?: string | null;
+            ctaLabel?: string | null;
+            ctaHref?: string | null;
             columns?: ('1' | '2') | null;
             items?:
               | {
@@ -399,6 +403,7 @@ export interface Page {
             blockType: 'numberedList';
           }
         | {
+            label?: string | null;
             /**
              * One field per line break — controls how the large headline wraps.
              */
@@ -408,11 +413,200 @@ export interface Page {
                   id?: string | null;
                 }[]
               | null;
+            body?: string | null;
             buttonLabel: string;
             buttonHref: string;
+            /**
+             * Adds a second button linking to the Site Settings WhatsApp number.
+             */
+            showWhatsappButton?: boolean | null;
+            whatsappButtonLabel?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'ctaBanner';
+          }
+        | {
+            items?:
+              | {
+                  /**
+                   * e.g. 01
+                   */
+                  number: string;
+                  title: string;
+                  /**
+                   * Optional larger sub-headline shown above the body (used by "why us" style reasons).
+                   */
+                  headline?: string | null;
+                  body?: string | null;
+                  /**
+                   * e.g. "Client Provides" — leave blank if this item has no sub-list.
+                   */
+                  subListLabel?: string | null;
+                  subList?:
+                    | {
+                        value: string;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  /**
+                   * e.g. "Outcome"
+                   */
+                  outcomeLabel?: string | null;
+                  outcome?: string | null;
+                  background?: ('warm-white' | 'soft-white' | 'navy') | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stageList';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            headline?: string | null;
+            body?: string | null;
+            items?:
+              | {
+                  number: string;
+                  label: string;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            ctaLabel?: string | null;
+            ctaHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'linkList';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            imagePosition?: ('left' | 'right') | null;
+            image?: (number | null) | Media;
+            label?: string | null;
+            headline: string;
+            body?: string | null;
+            /**
+             * Optional short emphasised line, e.g. a key-benefit statement.
+             */
+            highlight?: string | null;
+            /**
+             * Optional — rendered as a compact list, e.g. "scope may include".
+             */
+            scopeItems?:
+              | {
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Optional "best suited for" line.
+             */
+            suitedText?: string | null;
+            ctaLabel?: string | null;
+            ctaHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            note?: string | null;
+            ctaLabel?: string | null;
+            ctaHref?: string | null;
+            /**
+             * Optional — cap how many testimonials this block shows. Leave blank to show all published.
+             */
+            maxItems?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonialsGrid';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            emptyStateBody?: string | null;
+            emptyStateCtaLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'careersList';
+          }
+        | {
+            /**
+             * How many of the most recent projects to feature.
+             */
+            count?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featuredProjects';
+          }
+        | {
+            text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'marquee';
+          }
+        | {
+            /**
+             * Falls back to the site's default hero image if left blank.
+             */
+            image?: (number | null) | Media;
+            imageAlt?: string | null;
+            eyebrow?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            primaryCtaLabel?: string | null;
+            primaryCtaHref?: string | null;
+            secondaryCtaLabel?: string | null;
+            secondaryCtaHref?: string | null;
+            locationLine?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'homeHero';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            emptyStateBody?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faqAccordion';
+          }
+        | {
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            body?: string | null;
+            primaryCtaLabel?: string | null;
+            primaryCtaHref?: string | null;
+            secondaryCtaLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactDetails';
           }
       )[]
     | null;
@@ -856,8 +1050,11 @@ export interface PagesSelect<T extends boolean = true> {
               background?: T;
               label?: T;
               emphasis?: T;
+              align?: T;
               headline?: T;
               body?: T;
+              ctaLabel?: T;
+              ctaHref?: T;
               stats?:
                 | T
                 | {
@@ -919,6 +1116,9 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               background?: T;
               label?: T;
+              headline?: T;
+              ctaLabel?: T;
+              ctaHref?: T;
               columns?: T;
               items?:
                 | T
@@ -934,14 +1134,172 @@ export interface PagesSelect<T extends boolean = true> {
         ctaBanner?:
           | T
           | {
+              label?: T;
               headlineLines?:
                 | T
                 | {
                     line?: T;
                     id?: T;
                   };
+              body?: T;
               buttonLabel?: T;
               buttonHref?: T;
+              showWhatsappButton?: T;
+              whatsappButtonLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stageList?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    number?: T;
+                    title?: T;
+                    headline?: T;
+                    body?: T;
+                    subListLabel?: T;
+                    subList?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                        };
+                    outcomeLabel?: T;
+                    outcome?: T;
+                    background?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        linkList?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              headline?: T;
+              body?: T;
+              items?:
+                | T
+                | {
+                    number?: T;
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              ctaLabel?: T;
+              ctaHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              background?: T;
+              imagePosition?: T;
+              image?: T;
+              label?: T;
+              headline?: T;
+              body?: T;
+              highlight?: T;
+              scopeItems?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              suitedText?: T;
+              ctaLabel?: T;
+              ctaHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonialsGrid?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              note?: T;
+              ctaLabel?: T;
+              ctaHref?: T;
+              maxItems?: T;
+              id?: T;
+              blockName?: T;
+            };
+        careersList?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              emptyStateBody?: T;
+              emptyStateCtaLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featuredProjects?:
+          | T
+          | {
+              count?: T;
+              id?: T;
+              blockName?: T;
+            };
+        marquee?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        homeHero?:
+          | T
+          | {
+              image?: T;
+              imageAlt?: T;
+              eyebrow?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              primaryCtaLabel?: T;
+              primaryCtaHref?: T;
+              secondaryCtaLabel?: T;
+              secondaryCtaHref?: T;
+              locationLine?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faqAccordion?:
+          | T
+          | {
+              background?: T;
+              emptyStateBody?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactDetails?:
+          | T
+          | {
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              body?: T;
+              primaryCtaLabel?: T;
+              primaryCtaHref?: T;
+              secondaryCtaLabel?: T;
               id?: T;
               blockName?: T;
             };
@@ -1232,25 +1590,6 @@ export interface Tracking {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage".
- */
-export interface Homepage {
-  id: number;
-  hero?: {
-    /**
-     * Falls back to the default hero image if left blank.
-     */
-    image?: (number | null) | Media;
-    /**
-     * Describes the hero image for screen readers. Falls back to a default description if left blank.
-     */
-    imageAlt?: string | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
@@ -1325,21 +1664,6 @@ export interface TrackingSelect<T extends boolean = true> {
   metaPixelId?: T;
   customHeadCode?: T;
   customBodyEndCode?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage_select".
- */
-export interface HomepageSelect<T extends boolean = true> {
-  hero?:
-    | T
-    | {
-        image?: T;
-        imageAlt?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

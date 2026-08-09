@@ -3,7 +3,9 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -78,7 +80,18 @@ const STAGES = [
   },
 ];
 
-export default function ProcessPage() {
+export default async function ProcessPage() {
+  const page = await getPageByPath("/process");
+
+  if (page?.layout && page.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={page.layout} />
+      </>
+    );
+  }
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />

@@ -7,6 +7,16 @@ import { CredentialsGridBlock } from "../blocks/CredentialsGrid";
 import { SplitTextBlock } from "../blocks/SplitText";
 import { NumberedListBlock } from "../blocks/NumberedList";
 import { CTABannerBlock } from "../blocks/CTABanner";
+import { StageListBlock } from "../blocks/StageList";
+import { LinkListBlock } from "../blocks/LinkList";
+import { ImageTextBlock } from "../blocks/ImageText";
+import { TestimonialsGridBlock } from "../blocks/TestimonialsGrid";
+import { CareersListBlock } from "../blocks/CareersList";
+import { FeaturedProjectsBlock } from "../blocks/FeaturedProjects";
+import { MarqueeBlock } from "../blocks/Marquee";
+import { HomeHeroBlock } from "../blocks/HomeHero";
+import { FaqAccordionBlock } from "../blocks/FaqAccordion";
+import { ContactDetailsBlock } from "../blocks/ContactDetails";
 
 // Manages page names, publish status, per-page SEO, AND (via `layout`) the
 // page's body content as an ordered list of blocks — each block maps to a
@@ -89,6 +99,16 @@ export const Pages: CollectionConfig = {
         SplitTextBlock,
         NumberedListBlock,
         CTABannerBlock,
+        StageListBlock,
+        LinkListBlock,
+        ImageTextBlock,
+        TestimonialsGridBlock,
+        CareersListBlock,
+        FeaturedProjectsBlock,
+        MarqueeBlock,
+        HomeHeroBlock,
+        FaqAccordionBlock,
+        ContactDetailsBlock,
       ],
     },
   ],

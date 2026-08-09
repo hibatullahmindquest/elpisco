@@ -6,7 +6,27 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { gsap, registerGsap } from "@/lib/gsap";
 
-export function Hero({ imageUrl, imageAlt }: { imageUrl: string; imageAlt: string }) {
+export function Hero({
+  imageUrl,
+  imageAlt,
+  eyebrow,
+  headlineLines,
+  primaryCtaLabel,
+  primaryCtaHref,
+  secondaryCtaLabel,
+  secondaryCtaHref,
+  locationLine,
+}: {
+  imageUrl: string;
+  imageAlt: string;
+  eyebrow?: string;
+  headlineLines: string[];
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  locationLine?: string;
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
 
@@ -67,37 +87,47 @@ export function Hero({ imageUrl, imageAlt }: { imageUrl: string; imageAlt: strin
         className="container"
         style={{ position: "relative", width: "100%", paddingBottom: "clamp(48px, 8vh, 96px)" }}
       >
-        <p className="label" style={{ color: "var(--champagne)", marginBottom: 20 }}>
-          INTERIOR DESIGN &middot; RENOVATION &middot; DESIGN &amp; BUILD
-        </p>
+        {eyebrow && (
+          <p className="label" style={{ color: "var(--champagne)", marginBottom: 20 }}>
+            {eyebrow}
+          </p>
+        )}
         <RevealText
           as="h1"
           className="h-hero"
           style={{ color: "var(--soft-white)" }}
           immediate
           delay={0.15}
-          lines={["SPACES", "SHAPED", "AROUND YOU."]}
+          lines={headlineLines}
         />
 
-        <div
-          style={{
-            marginTop: "clamp(28px, 4vw, 44px)",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "clamp(20px, 3vw, 40px)",
-          }}
-        >
-          <AnimatedLink href="/start-a-project" variant="solid-invert">
-            BOOK A CONSULTATION
-          </AnimatedLink>
-          <AnimatedLink href="/projects" style={{ color: "var(--soft-white)" }}>
-            VIEW SELECTED WORK
-          </AnimatedLink>
-          <p className="label" style={{ color: "rgba(244,241,234,0.6)" }}>
-            SHAH ALAM &middot; MALAYSIA
-          </p>
-        </div>
+        {(primaryCtaLabel || secondaryCtaLabel || locationLine) && (
+          <div
+            style={{
+              marginTop: "clamp(28px, 4vw, 44px)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "clamp(20px, 3vw, 40px)",
+            }}
+          >
+            {primaryCtaLabel && primaryCtaHref && (
+              <AnimatedLink href={primaryCtaHref} variant="solid-invert">
+                {primaryCtaLabel}
+              </AnimatedLink>
+            )}
+            {secondaryCtaLabel && secondaryCtaHref && (
+              <AnimatedLink href={secondaryCtaHref} style={{ color: "var(--soft-white)" }}>
+                {secondaryCtaLabel}
+              </AnimatedLink>
+            )}
+            {locationLine && (
+              <p className="label" style={{ color: "rgba(244,241,234,0.6)" }}>
+                {locationLine}
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       <div

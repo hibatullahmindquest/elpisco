@@ -1,4 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { RevealText } from "@/components/ui/RevealText";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { resolveBackground, isDarkBackground } from "./shared";
 
 type Item = { number: string; title: string; body?: string | null };
@@ -28,11 +30,17 @@ function ItemRow({ item, dark }: { item: Item; dark: boolean }) {
 export function NumberedListBlockView({
   background,
   label,
+  headline,
+  ctaLabel,
+  ctaHref,
   columns,
   items,
 }: {
   background?: string | null;
   label?: string | null;
+  headline?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
   columns?: string | null;
   items?: Item[] | null;
 }) {
@@ -46,6 +54,14 @@ export function NumberedListBlockView({
     <section data-nav-theme={dark ? "dark" : "light"} style={{ background: resolveBackground(background), paddingBlock: "clamp(64px, 10vw, 120px)" }}>
       <div className="container">
         {label && <SectionLabel theme={dark ? "dark" : "light"}>{label}</SectionLabel>}
+        {headline && (
+          <RevealText
+            as="h2"
+            className="h-medium"
+            lines={[headline]}
+            style={{ color: dark ? "var(--soft-white)" : "var(--ink)", marginTop: 14 }}
+          />
+        )}
         <div className="grid-12" style={{ marginTop: 32 }}>
           <div className={twoColumns ? "col-line-1-6" : undefined} style={twoColumns ? undefined : { gridColumn: "1 / -1" }}>
             {firstColItems.map((item) => (
@@ -61,6 +77,11 @@ export function NumberedListBlockView({
             </div>
           )}
         </div>
+        {ctaLabel && ctaHref && (
+          <div style={{ marginTop: "clamp(32px, 5vw, 48px)" }}>
+            <AnimatedLink href={ctaHref}>{ctaLabel}</AnimatedLink>
+          </div>
+        )}
       </div>
     </section>
   );

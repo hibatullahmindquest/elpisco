@@ -21,6 +21,15 @@ export const TextSectionBlock: Block = {
       ],
     },
     {
+      name: "align",
+      type: "select",
+      defaultValue: "left",
+      options: [
+        { label: "Left (label/headline left, body right)", value: "left" },
+        { label: "Centered (full width)", value: "center" },
+      ],
+    },
+    {
       name: "headline",
       type: "text",
       admin: { description: "For \"Feature\" emphasis, separate lines with a | character." },
@@ -30,6 +39,8 @@ export const TextSectionBlock: Block = {
       type: "textarea",
       admin: { description: "Separate paragraphs with a blank line." },
     },
+    { name: "ctaLabel", type: "text" },
+    { name: "ctaHref", type: "text" },
     {
       name: "stats",
       type: "array",
