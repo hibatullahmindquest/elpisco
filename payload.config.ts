@@ -12,6 +12,7 @@ import { Projects } from "./collections/Projects";
 import { Pages } from "./collections/Pages";
 import { Navigation } from "./globals/Navigation";
 import { SiteSettings } from "./globals/SiteSettings";
+import { SEO } from "./globals/SEO";
 import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
@@ -25,7 +26,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Projects, Pages],
-  globals: [Navigation, SiteSettings],
+  globals: [Navigation, SiteSettings, SEO],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

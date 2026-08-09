@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { getPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Process",
-  description: "How Elpis.co works, from first consultation through to handover.",
-};
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/process", {
+    title: "Process",
+    description: "How Elpis.co works, from first consultation through to handover.",
+  });
+}
 
 const STEPS = [
   {

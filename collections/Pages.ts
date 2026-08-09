@@ -1,8 +1,9 @@
 import type { CollectionConfig } from "payload";
 
-// Scaffold only for now: lets an admin manage page names and publish status.
-// Section-by-section content editing and SEO fields land in later phases —
-// see the module plan (Phase 3: Site Settings, Phase 4: SEO/AEO/GEO).
+// Metadata scaffold: lets an admin manage page names, publish status, and
+// per-page SEO — it does NOT control section-by-section body content or
+// layout, which stays hand-built (see the module plan's Section Registry
+// discussion for why: preserves the GSAP-driven design).
 export const Pages: CollectionConfig = {
   slug: "pages",
   access: {
@@ -39,6 +40,29 @@ export const Pages: CollectionConfig = {
       admin: {
         position: "sidebar",
       },
+    },
+    {
+      type: "group",
+      name: "seo",
+      label: "SEO",
+      fields: [
+        {
+          name: "metaTitle",
+          type: "text",
+          admin: {
+            description: "Falls back to the page title above if left blank.",
+          },
+        },
+        {
+          name: "metaDescription",
+          type: "textarea",
+        },
+        {
+          name: "ogImage",
+          type: "upload",
+          relationTo: "media",
+        },
+      ],
     },
   ],
 };

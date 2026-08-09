@@ -3,11 +3,16 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { getPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Studio",
-  description: "Elpis.co is an interior design, renovation and design & build studio based in Shah Alam, Malaysia.",
-};
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/studio", {
+    title: "Studio",
+    description: "Elpis.co is an interior design, renovation and design & build studio based in Shah Alam, Malaysia.",
+  });
+}
 
 export default function StudioPage() {
   return (

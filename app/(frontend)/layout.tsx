@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { getNavigation } from "@/lib/navigation";
 import { getSiteSettings } from "@/lib/siteSettings";
+import { getRootMetadata, getOrganizationJsonLd } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -40,32 +41,16 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://elpisco.vercel.app"),
-  title: {
-    default: "Elpis.co | Interior Design & Renovation",
-    template: "%s | Elpis.co",
-  },
-  description:
-    "Elpis.co is an interior design, renovation and design & build studio based in Shah Alam, Malaysia. Spaces shaped around the way you live.",
-  openGraph: {
-    title: "Elpis.co | Interior Design & Renovation",
-    description:
-      "Interior design, renovation and design & build. Spaces shaped around the way you live.",
-    siteName: "Elpis.co",
-    type: "website",
-    locale: "en_MY",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Elpis.co | Interior Design & Renovation",
-    description:
-      "Interior design, renovation and design & build. Spaces shaped around the way you live.",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getRootMetadata();
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [navItems, settings] = await Promise.all([getNavigation(), getSiteSettings()]);
+  const [navItems, settings, organizationJsonLd] = await Promise.all([
+    getNavigation(),
+    getSiteSettings(),
+    getOrganizationJsonLd(),
+  ]);
 
   const fontOverride =
     settings.fontPreset === "playfair-inter"
@@ -82,6 +67,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       style={fontOverride}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <SmoothScroll>
           <CustomCursor />
           <Header

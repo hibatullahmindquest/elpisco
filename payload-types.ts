@@ -94,10 +94,12 @@ export interface Config {
   globals: {
     navigation: Navigation;
     'site-settings': SiteSetting;
+    seo: Seo;
   };
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    seo: SeoSelect<false> | SeoSelect<true>;
   };
   locale: null;
   widgets: {
@@ -203,6 +205,20 @@ export interface Project {
       }[]
     | null;
   description?: string | null;
+  seo?: {
+    /**
+     * Falls back to the project title if left blank.
+     */
+    metaTitle?: string | null;
+    /**
+     * Falls back to the description above if left blank.
+     */
+    metaDescription?: string | null;
+    /**
+     * Falls back to the hero image if left blank.
+     */
+    ogImage?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -218,6 +234,14 @@ export interface Page {
    */
   path: string;
   status?: ('published' | 'draft') | null;
+  seo?: {
+    /**
+     * Falls back to the page title above if left blank.
+     */
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -371,6 +395,13 @@ export interface ProjectsSelect<T extends boolean = true> {
         id?: T;
       };
   description?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -382,6 +413,13 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   path?: T;
   status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -472,6 +510,53 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo".
+ */
+export interface Seo {
+  id: number;
+  defaultMetaTitle?: string | null;
+  defaultMetaDescription?: string | null;
+  defaultOgImage?: (number | null) | Media;
+  /**
+   * e.g. @elpisco (optional)
+   */
+  twitterHandle?: string | null;
+  /**
+   * Google Search Console verification code, if used.
+   */
+  googleSiteVerification?: string | null;
+  /**
+   * Uncheck to tell all search engines/crawlers not to index the site (e.g. while staging).
+   */
+  robotsIndex?: boolean | null;
+  /**
+   * Powers the Organization/LocalBusiness structured data (JSON-LD) that answer engines and AI crawlers (ChatGPT, Gemini, Perplexity, etc.) read to describe the business.
+   */
+  organization?: {
+    /**
+     * Falls back to Site Settings' site name if left blank.
+     */
+    legalName?: string | null;
+    /**
+     * Falls back to Site Settings' tagline if left blank.
+     */
+    description?: string | null;
+    /**
+     * e.g. $$ or $$$ (optional)
+     */
+    priceRange?: string | null;
+    sameAs?:
+      | {
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
@@ -503,6 +588,34 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         instagramUrl?: T;
         city?: T;
         country?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo_select".
+ */
+export interface SeoSelect<T extends boolean = true> {
+  defaultMetaTitle?: T;
+  defaultMetaDescription?: T;
+  defaultOgImage?: T;
+  twitterHandle?: T;
+  googleSiteVerification?: T;
+  robotsIndex?: T;
+  organization?:
+    | T
+    | {
+        legalName?: T;
+        description?: T;
+        priceRange?: T;
+        sameAs?:
+          | T
+          | {
+              url?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

@@ -5,13 +5,16 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getProjects } from "@/lib/projects";
 import type { Project } from "@/data/projects";
+import { getPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Selected Work",
-  description: "A selection of interior design, renovation and design & build projects by Elpis.co.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/projects", {
+    title: "Selected Work",
+    description: "A selection of interior design, renovation and design & build projects by Elpis.co.",
+  });
+}
 
 export default async function ProjectsPage() {
   const projects = await getProjects();

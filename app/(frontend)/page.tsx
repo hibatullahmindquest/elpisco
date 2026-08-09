@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { Intro } from "@/components/home/Intro";
 import { FeaturedProject } from "@/components/home/FeaturedProject";
@@ -8,8 +9,17 @@ import { Process } from "@/components/home/Process";
 import { Marquee } from "@/components/home/Marquee";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { getProjects } from "@/lib/projects";
+import { getPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/", {
+    title: "Elpis.co | Interior Design & Renovation",
+    description:
+      "Elpis.co is an interior design, renovation and design & build studio based in Shah Alam, Malaysia. Spaces shaped around the way you live.",
+  });
+}
 
 export default async function Home() {
   const projects = await getProjects();

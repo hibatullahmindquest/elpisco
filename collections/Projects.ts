@@ -114,5 +114,34 @@ export const Projects: CollectionConfig = {
       name: "description",
       type: "textarea",
     },
+    {
+      type: "group",
+      name: "seo",
+      label: "SEO",
+      fields: [
+        {
+          name: "metaTitle",
+          type: "text",
+          admin: {
+            description: "Falls back to the project title if left blank.",
+          },
+        },
+        {
+          name: "metaDescription",
+          type: "textarea",
+          admin: {
+            description: "Falls back to the description above if left blank.",
+          },
+        },
+        {
+          name: "ogImage",
+          type: "upload",
+          relationTo: "media",
+          admin: {
+            description: "Falls back to the hero image if left blank.",
+          },
+        },
+      ],
+    },
   ],
 };

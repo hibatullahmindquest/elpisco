@@ -3,13 +3,16 @@ import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { getSiteSettings } from "@/lib/siteSettings";
+import { getPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Start a project with Elpis.co. Interior design, renovation and design & build in Shah Alam, Malaysia.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/contact", {
+    title: "Contact",
+    description: "Start a project with Elpis.co. Interior design, renovation and design & build in Shah Alam, Malaysia.",
+  });
+}
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();

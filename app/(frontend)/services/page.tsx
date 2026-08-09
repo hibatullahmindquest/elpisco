@@ -3,12 +3,17 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { getPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Interior design, renovation & build, space planning and project management, from Elpis.co.",
-};
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata("/services", {
+    title: "Services",
+    description:
+      "Interior design, renovation & build, space planning and project management, from Elpis.co.",
+  });
+}
 
 const SERVICES = [
   {

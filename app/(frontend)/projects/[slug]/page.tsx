@@ -7,6 +7,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ProjectMeta } from "@/components/ui/ProjectMeta";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getProject, getProjects } from "@/lib/projects";
+import { getProjectMetadata, getProjectJsonLd } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -16,10 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const project = await getProject(slug);
   if (!project) return {};
-  return {
+  return getProjectMetadata(slug, {
     title: project.title,
     description: project.description,
-  };
+    imageUrl: project.hero,
+  });
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<Params> }) {
@@ -30,9 +32,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
   const projects = await getProjects();
   const index = projects.findIndex((p) => p.slug === slug);
   const next = projects[(index + 1) % projects.length];
+  const jsonLd = await getProjectJsonLd(project);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <section
         data-nav-theme="light"
         style={{
