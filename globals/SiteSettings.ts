@@ -42,6 +42,19 @@ export const SiteSettings: GlobalConfig = {
       },
     },
     {
+      name: "colorPreset",
+      type: "select",
+      defaultValue: "elpis-editorial",
+      options: [
+        { label: "Elpis Editorial (default)", value: "elpis-editorial" },
+        { label: "Client Brand Palette (Navy / Ivory / Charcoal / Gold)", value: "client-palette" },
+      ],
+      admin: {
+        description:
+          "A curated set of color palettes. Elpis Editorial is the site's original dark-navy tone; Client Brand Palette applies the exact brand hex codes (#183A6B navy, #F7F3EA ivory, #1C1C1C charcoal, #C8A96A gold) site-wide.",
+      },
+    },
+    {
       type: "group",
       name: "contact",
       fields: [

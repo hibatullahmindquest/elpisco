@@ -6,6 +6,7 @@ export type SiteSettings = {
   logoUrl: string | null;
   tagline: string;
   fontPreset: "instrument-manrope" | "playfair-inter" | "playfair-montserrat";
+  colorPreset: "elpis-editorial" | "client-palette";
   email: string;
   whatsappUrl: string;
   instagramUrl: string;
@@ -18,6 +19,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   logoUrl: null,
   tagline: "Interior design, renovation and design & build, based in Shah Alam, Malaysia.",
   fontPreset: "instrument-manrope",
+  colorPreset: "elpis-editorial",
   email: "[EMAIL_ADDRESS]",
   whatsappUrl: "[WHATSAPP_URL]",
   instagramUrl: "[INSTAGRAM_URL]",
@@ -39,6 +41,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       logoUrl: mediaUrl(settings.logo),
       tagline: settings.tagline || DEFAULT_SETTINGS.tagline,
       fontPreset: settings.fontPreset || DEFAULT_SETTINGS.fontPreset,
+      colorPreset: settings.colorPreset || DEFAULT_SETTINGS.colorPreset,
       email: settings.contact?.email || DEFAULT_SETTINGS.email,
       whatsappUrl: settings.contact?.whatsappUrl || DEFAULT_SETTINGS.whatsappUrl,
       instagramUrl: settings.contact?.instagramUrl || DEFAULT_SETTINGS.instagramUrl,

@@ -50,6 +50,23 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+// Exact client brand hex codes: #183A6B navy, #F7F3EA ivory, #1C1C1C charcoal,
+// #C8A96A gold. The other tokens (soft-white, champagne-ink, line colors) are
+// derived from these to keep the same contrast/tint relationships the
+// default Elpis Editorial palette relies on.
+const CLIENT_PALETTE: React.CSSProperties = {
+  "--navy": "#183A6B",
+  "--warm-white": "#F7F3EA",
+  "--soft-white": "#FEFCF7",
+  "--ink": "#1C1C1C",
+  "--champagne": "#C8A96A",
+  "--champagne-ink": "#8C6729",
+  "--champagne-soft": "rgba(200, 169, 106, 0.5)",
+  "--muted": "#6E6C66",
+  "--line": "rgba(28, 28, 28, 0.12)",
+  "--line-on-navy": "rgba(247, 243, 234, 0.16)",
+} as React.CSSProperties;
+
 export async function generateMetadata(): Promise<Metadata> {
   return getRootMetadata();
 }
@@ -75,11 +92,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           } as React.CSSProperties)
         : undefined;
 
+  const colorOverride = settings.colorPreset === "client-palette" ? CLIENT_PALETTE : undefined;
+
   return (
     <html
       lang="en"
       className={`${instrumentSerif.variable} ${manrope.variable} ${playfairDisplay.variable} ${inter.variable} ${montserrat.variable}`}
-      style={fontOverride}
+      style={{ ...fontOverride, ...colorOverride }}
     >
       <head>
         <TrackingHeadCode settings={tracking} />

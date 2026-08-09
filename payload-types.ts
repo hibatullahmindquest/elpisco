@@ -1565,6 +1565,10 @@ export interface SiteSetting {
    * A curated set of font pairs. Self-hosted fonts must be built into the site ahead of time, so this isn't a free-text field.
    */
   fontPreset?: ('instrument-manrope' | 'playfair-inter' | 'playfair-montserrat') | null;
+  /**
+   * A curated set of color palettes. Elpis Editorial is the site's original dark-navy tone; Client Brand Palette applies the exact brand hex codes (#183A6B navy, #F7F3EA ivory, #1C1C1C charcoal, #C8A96A gold) site-wide.
+   */
+  colorPreset?: ('elpis-editorial' | 'client-palette') | null;
   contact?: {
     email?: string | null;
     whatsappUrl?: string | null;
@@ -1675,6 +1679,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   logo?: T;
   tagline?: T;
   fontPreset?: T;
+  colorPreset?: T;
   contact?:
     | T
     | {
