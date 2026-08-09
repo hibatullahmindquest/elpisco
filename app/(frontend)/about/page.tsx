@@ -6,6 +6,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getCredentials } from "@/lib/credentials";
+import { getFounders } from "@/lib/founders";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
@@ -43,13 +44,8 @@ const BACKGROUND_DATA = [
   { label: "CORE TEAM", value: "[NUMBER]" },
 ];
 
-const FOUNDERS = [
-  { n: "01", name: "[FOUNDER NAME]", title: "CO-FOUNDER / [TITLE]" },
-  { n: "02", name: "[FOUNDER NAME]", title: "CO-FOUNDER / [TITLE]" },
-];
-
 export default async function AboutPage() {
-  const credentials = await getCredentials();
+  const [credentials, founders] = await Promise.all([getCredentials(), getFounders()]);
 
   return (
     <>
@@ -165,37 +161,58 @@ export default async function AboutPage() {
           <SectionLabel>Founders</SectionLabel>
           <RevealText as="h2" className="h-section" lines={["THE PEOPLE", "BEHIND ELPIS."]} style={{ color: "var(--ink)", marginTop: 14 }} />
 
-          <div className="grid-12" style={{ marginTop: 56, rowGap: 48 }}>
-            {FOUNDERS.map((founder) => (
-              <div key={founder.n} className="col-line-1-6">
-                <div
-                  style={{
-                    aspectRatio: "3 / 4",
-                    background: "var(--line)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  aria-hidden="true"
-                >
-                  <span className="label" style={{ color: "var(--muted)" }}>
-                    PORTRAIT PENDING
-                  </span>
+          {founders.length > 0 ? (
+            <div className="grid-12" style={{ marginTop: 56, rowGap: 48 }}>
+              {founders.map((founder) => (
+                <div key={founder.name} className="col-line-1-6">
+                  {founder.photoUrl ? (
+                    <div style={{ position: "relative", aspectRatio: "3 / 4" }}>
+                      <Image
+                        src={founder.photoUrl}
+                        alt={founder.name}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 40vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        aspectRatio: "3 / 4",
+                        background: "var(--line)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      aria-hidden="true"
+                    >
+                      <span className="label" style={{ color: "var(--muted)" }}>
+                        PORTRAIT PENDING
+                      </span>
+                    </div>
+                  )}
+                  <p className="h-medium" style={{ fontSize: "clamp(24px, 2.4vw, 32px)", color: "var(--ink)", marginTop: 20 }}>
+                    {founder.name}
+                  </p>
+                  {founder.title && (
+                    <p className="label" style={{ color: "var(--champagne-ink)", marginTop: 6 }}>
+                      {founder.title}
+                    </p>
+                  )}
+                  {founder.bio && (
+                    <p className="body-copy" style={{ marginTop: 14, maxWidth: 380 }}>
+                      {founder.bio}
+                    </p>
+                  )}
                 </div>
-                <p className="h-medium" style={{ fontSize: "clamp(24px, 2.4vw, 32px)", color: "var(--ink)", marginTop: 20 }}>
-                  {founder.name}
-                </p>
-                <p className="label" style={{ color: "var(--champagne-ink)", marginTop: 6 }}>
-                  {founder.title}
-                </p>
-                <p className="body-copy" style={{ marginTop: 14, maxWidth: 380 }}>
-                  Founder biography pending — to be provided by Elpis. Professional background,
-                  years of experience, specialisation and design philosophy will appear here once
-                  confirmed.
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="body-copy" style={{ marginTop: 32, maxWidth: 420 }}>
+              Founder profiles will appear here once Elpis provides names, photos and
+              biographies.
+            </p>
+          )}
         </div>
       </section>
 

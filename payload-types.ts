@@ -77,6 +77,7 @@ export interface Config {
     testimonials: Testimonial;
     credentials: Credential;
     careers: Career;
+    founders: Founder;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     credentials: CredentialsSelect<false> | CredentialsSelect<true>;
     careers: CareersSelect<false> | CareersSelect<true>;
+    founders: FoundersSelect<false> | FoundersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -108,12 +110,14 @@ export interface Config {
     'site-settings': SiteSetting;
     seo: Seo;
     tracking: Tracking;
+    homepage: Homepage;
   };
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
     tracking: TrackingSelect<false> | TrackingSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -437,6 +441,31 @@ export interface Career {
   createdAt: string;
 }
 /**
+ * Founder / principal profiles shown on the About page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "founders".
+ */
+export interface Founder {
+  id: number;
+  /**
+   * Controls display order — lower numbers show first.
+   */
+  order?: number | null;
+  name: string;
+  /**
+   * e.g. "CO-FOUNDER / PRINCIPAL DESIGNER"
+   */
+  title?: string | null;
+  /**
+   * 80–120 words: professional background, specialisation, design philosophy.
+   */
+  bio?: string | null;
+  photo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -499,6 +528,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'careers';
         value: number | Career;
+      } | null)
+    | ({
+        relationTo: 'founders';
+        value: number | Founder;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -748,6 +781,19 @@ export interface CareersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "founders_select".
+ */
+export interface FoundersSelect<T extends boolean = true> {
+  order?: T;
+  name?: T;
+  title?: T;
+  bio?: T;
+  photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -908,6 +954,25 @@ export interface Tracking {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  hero?: {
+    /**
+     * Falls back to the default hero image if left blank.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Describes the hero image for screen readers. Falls back to a default description if left blank.
+     */
+    imageAlt?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
@@ -982,6 +1047,21 @@ export interface TrackingSelect<T extends boolean = true> {
   metaPixelId?: T;
   customHeadCode?: T;
   customBodyEndCode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        image?: T;
+        imageAlt?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

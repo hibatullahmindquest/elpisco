@@ -6,6 +6,7 @@ import * as migration_20260809_030052_add_tracking from './20260809_030052_add_t
 import * as migration_20260809_043924_add_redirects_enquiries from './20260809_043924_add_redirects_enquiries';
 import * as migration_20260809_053152_add_faq_testimonials_credentials_careers from './20260809_053152_add_faq_testimonials_credentials_careers';
 import * as migration_20260809_064509_extend_enquiries_for_assessment_wizard from './20260809_064509_extend_enquiries_for_assessment_wizard';
+import * as migration_20260809_073329_add_founders_and_homepage from './20260809_073329_add_founders_and_homepage';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20260809_064509_extend_enquiries_for_assessment_wizard.up,
     down: migration_20260809_064509_extend_enquiries_for_assessment_wizard.down,
-    name: '20260809_064509_extend_enquiries_for_assessment_wizard'
+    name: '20260809_064509_extend_enquiries_for_assessment_wizard',
+  },
+  {
+    up: migration_20260809_073329_add_founders_and_homepage.up,
+    down: migration_20260809_073329_add_founders_and_homepage.down,
+    name: '20260809_073329_add_founders_and_homepage'
   },
 ];

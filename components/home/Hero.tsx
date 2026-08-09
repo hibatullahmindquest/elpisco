@@ -6,7 +6,7 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { gsap, registerGsap } from "@/lib/gsap";
 
-export function Hero() {
+export function Hero({ imageUrl, imageAlt }: { imageUrl: string; imageAlt: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
 
@@ -45,8 +45,8 @@ export function Hero() {
       }}
     >
       <ParallaxImage
-        src="/images/hero/main.jpg"
-        alt="Architectural interior with natural light and considered material palette"
+        src={imageUrl}
+        alt={imageAlt}
         background
         priority
         immediate

@@ -11,6 +11,7 @@ import { Marquee } from "@/components/home/Marquee";
 import { Testimonials } from "@/components/home/Testimonials";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { getProjects } from "@/lib/projects";
+import { getHomepageSettings } from "@/lib/homepage";
 import { getPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -24,11 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const projects = await getProjects();
+  const [projects, homepage] = await Promise.all([getProjects(), getHomepageSettings()]);
 
   return (
     <>
-      <Hero />
+      <Hero imageUrl={homepage.heroImageUrl} imageAlt={homepage.heroImageAlt} />
       <Intro />
       {projects[0] && <FeaturedProject project={projects[0]} index={1} variant="a" />}
       {projects[1] && <FeaturedProject project={projects[1]} index={2} variant="b" />}
