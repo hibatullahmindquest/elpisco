@@ -17,6 +17,7 @@ import { MarqueeBlockView } from "./MarqueeBlockView";
 import { HomeHeroBlockView } from "./HomeHeroBlockView";
 import { FaqAccordionBlockView } from "./FaqAccordionBlockView";
 import { ContactDetailsBlockView } from "./ContactDetailsBlockView";
+import { StickyStepListBlockView } from "./StickyStepListBlockView";
 
 type LayoutBlocks = NonNullable<Page["layout"]>;
 type LayoutBlock = LayoutBlocks[number];
@@ -64,6 +65,8 @@ export function RenderBlocks({ blocks }: { blocks?: LayoutBlocks | null }) {
             return <FaqAccordionBlockView key={block.id} {...block} />;
           case "contactDetails":
             return <ContactDetailsBlockView key={block.id} {...block} />;
+          case "stickyStepList":
+            return <StickyStepListBlockView key={block.id} {...block} />;
           default:
             return null;
         }

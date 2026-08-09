@@ -21,6 +21,8 @@ import * as migration_20260809_094115_seed_contact_page_content from './20260809
 import * as migration_20260809_094130_seed_home_page_content from './20260809_094130_seed_home_page_content';
 import * as migration_20260809_095403_restore_images_and_headline_accent from './20260809_095403_restore_images_and_headline_accent';
 import * as migration_20260809_095500_restore_images_and_two_tone_headlines from './20260809_095500_restore_images_and_two_tone_headlines';
+import * as migration_20260809_102648_add_sticky_step_list_block from './20260809_102648_add_sticky_step_list_block';
+import * as migration_20260809_102700_restore_home_process_sticky_scroll from './20260809_102700_restore_home_process_sticky_scroll';
 
 export const migrations = [
   {
@@ -137,5 +139,15 @@ export const migrations = [
     up: migration_20260809_095500_restore_images_and_two_tone_headlines.up,
     down: migration_20260809_095500_restore_images_and_two_tone_headlines.down,
     name: '20260809_095500_restore_images_and_two_tone_headlines',
+  },
+  {
+    up: migration_20260809_102648_add_sticky_step_list_block.up,
+    down: migration_20260809_102648_add_sticky_step_list_block.down,
+    name: '20260809_102648_add_sticky_step_list_block',
+  },
+  {
+    up: migration_20260809_102700_restore_home_process_sticky_scroll.up,
+    down: migration_20260809_102700_restore_home_process_sticky_scroll.down,
+    name: '20260809_102700_restore_home_process_sticky_scroll',
   },
 ];

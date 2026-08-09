@@ -17,6 +17,7 @@ import { MarqueeBlock } from "../blocks/Marquee";
 import { HomeHeroBlock } from "../blocks/HomeHero";
 import { FaqAccordionBlock } from "../blocks/FaqAccordion";
 import { ContactDetailsBlock } from "../blocks/ContactDetails";
+import { StickyStepListBlock } from "../blocks/StickyStepList";
 
 // Manages page names, publish status, per-page SEO, AND (via `layout`) the
 // page's body content as an ordered list of blocks — each block maps to a
@@ -109,6 +110,7 @@ export const Pages: CollectionConfig = {
         HomeHeroBlock,
         FaqAccordionBlock,
         ContactDetailsBlock,
+        StickyStepListBlock,
       ],
     },
   ],

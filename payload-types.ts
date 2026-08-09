@@ -620,6 +620,32 @@ export interface Page {
             blockName?: string | null;
             blockType: 'contactDetails';
           }
+        | {
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            items?:
+              | {
+                  /**
+                   * e.g. 01
+                   */
+                  number: string;
+                  title: string;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stickyStepList';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -1315,6 +1341,27 @@ export interface PagesSelect<T extends boolean = true> {
               primaryCtaLabel?: T;
               primaryCtaHref?: T;
               secondaryCtaLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stickyStepList?:
+          | T
+          | {
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              items?:
+                | T
+                | {
+                    number?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
