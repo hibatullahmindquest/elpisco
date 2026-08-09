@@ -5,7 +5,17 @@ import { useEffect, useState } from "react";
 import { FullscreenMenu } from "./FullscreenMenu";
 import type { NavItem } from "@/lib/navigation";
 
-export function Header({ navItems }: { navItems: NavItem[] }) {
+export function Header({
+  navItems,
+  siteName,
+  logoUrl,
+  contact,
+}: {
+  navItems: NavItem[];
+  siteName: string;
+  logoUrl: string | null;
+  contact: { instagramUrl: string; whatsappUrl: string; city: string; country: string };
+}) {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -82,10 +92,15 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
           <Link
             href="/"
             className="label"
-            style={{ pointerEvents: "auto", letterSpacing: "0.16em" }}
+            style={{ pointerEvents: "auto", letterSpacing: "0.16em", display: "flex", alignItems: "center" }}
             onClick={() => setMenuOpen(false)}
           >
-            ELPIS.CO
+            {logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={logoUrl} alt={siteName} style={{ height: 22, width: "auto" }} />
+            ) : (
+              siteName
+            )}
           </Link>
           <button
             type="button"
@@ -100,7 +115,15 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
         </div>
       </header>
 
-      <FullscreenMenu open={menuOpen} onClose={() => setMenuOpen(false)} navItems={navItems} />
+      <FullscreenMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        navItems={navItems}
+        instagramUrl={contact.instagramUrl}
+        whatsappUrl={contact.whatsappUrl}
+        city={contact.city}
+        country={contact.country}
+      />
     </>
   );
 }

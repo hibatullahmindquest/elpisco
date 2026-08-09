@@ -9,10 +9,18 @@ export function FullscreenMenu({
   open,
   onClose,
   navItems,
+  instagramUrl,
+  whatsappUrl,
+  city,
+  country,
 }: {
   open: boolean;
   onClose: () => void;
   navItems: NavItem[];
+  instagramUrl: string;
+  whatsappUrl: string;
+  city: string;
+  country: string;
 }) {
   const links = navItems.map((item, i) => ({ n: String(i + 1).padStart(2, "0"), ...item }));
   const panelRef = useRef<HTMLDivElement>(null);
@@ -136,19 +144,19 @@ export function FullscreenMenu({
           }}
         >
           <div data-menu-meta style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <a href="[INSTAGRAM_URL]" className="label" style={{ color: "var(--soft-white)" }}>
+            <a href={instagramUrl} className="label" style={{ color: "var(--soft-white)" }}>
               INSTAGRAM
             </a>
-            <a href="[WHATSAPP_URL]" className="label" style={{ color: "var(--soft-white)" }}>
+            <a href={whatsappUrl} className="label" style={{ color: "var(--soft-white)" }}>
               WHATSAPP
             </a>
           </div>
           <div data-menu-meta style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <span className="label" style={{ color: "rgba(244,241,234,0.5)" }}>
-              SHAH ALAM
+              {city.toUpperCase()}
             </span>
             <span className="label" style={{ color: "rgba(244,241,234,0.5)" }}>
-              MALAYSIA
+              {country.toUpperCase()}
             </span>
           </div>
         </div>

@@ -93,9 +93,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     navigation: Navigation;
+    'site-settings': SiteSetting;
   };
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -441,6 +443,35 @@ export interface Navigation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  /**
+   * Shown in the header wordmark and footer, unless a logo image is set below.
+   */
+  siteName?: string | null;
+  /**
+   * Optional. If set, replaces the text wordmark in the header.
+   */
+  logo?: (number | null) | Media;
+  tagline?: string | null;
+  /**
+   * A curated set of font pairs. Self-hosted fonts must be built into the site ahead of time, so this isn't a free-text field.
+   */
+  fontPreset?: ('instrument-manrope' | 'playfair-inter') | null;
+  contact?: {
+    email?: string | null;
+    whatsappUrl?: string | null;
+    instagramUrl?: string | null;
+    city?: string | null;
+    country?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
@@ -450,6 +481,28 @@ export interface NavigationSelect<T extends boolean = true> {
         label?: T;
         href?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  logo?: T;
+  tagline?: T;
+  fontPreset?: T;
+  contact?:
+    | T
+    | {
+        email?: T;
+        whatsappUrl?: T;
+        instagramUrl?: T;
+        city?: T;
+        country?: T;
       };
   updatedAt?: T;
   createdAt?: T;

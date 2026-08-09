@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { getSiteSettings } from "@/lib/siteSettings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Start a project with Elpis.co. Interior design, renovation and design & build in Shah Alam, Malaysia.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getSiteSettings();
+
   return (
     <section
       data-nav-theme="light"
@@ -27,7 +32,7 @@ export default function ContactPage() {
         </p>
 
         <div style={{ marginTop: 16 }}>
-          <a href="[WHATSAPP_URL]" className="cta" target="_blank" rel="noopener noreferrer">
+          <a href={settings.whatsappUrl} className="cta" target="_blank" rel="noopener noreferrer">
             <span className="cta-label">CONTINUE ON WHATSAPP</span>
             <span className="cta-arrow" aria-hidden="true">
               &#8599;

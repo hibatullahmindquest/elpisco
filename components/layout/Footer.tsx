@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import type { SiteSettings } from "@/lib/siteSettings";
 
-export function Footer() {
+export function Footer({ settings }: { settings: SiteSettings }) {
+  const year = new Date().getFullYear();
+
   return (
     <footer data-nav-theme="dark" style={{ background: "var(--navy)", color: "var(--soft-white)" }}>
       <div className="container" style={{ paddingBlock: "clamp(64px, 10vw, 120px) 40px" }}>
@@ -11,10 +14,10 @@ export function Footer() {
         >
           <div style={{ gridColumn: "span 4" }}>
             <p className="label" style={{ color: "var(--champagne)", marginBottom: 18 }}>
-              ELPIS.CO
+              {settings.siteName}
             </p>
             <p style={{ color: "rgba(244,241,234,0.7)", fontSize: 15, lineHeight: 1.6, maxWidth: 260 }}>
-              Interior design, renovation and design &amp; build, based in Shah Alam, Malaysia.
+              {settings.tagline}
             </p>
           </div>
 
@@ -22,21 +25,23 @@ export function Footer() {
             <p className="label" style={{ color: "var(--champagne)", marginBottom: 8 }}>
               STUDIO
             </p>
-            <span style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>Shah Alam, Malaysia</span>
+            <span style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
+              {settings.city}, {settings.country}
+            </span>
           </div>
 
           <div style={{ gridColumn: "span 4", display: "flex", flexDirection: "column", gap: 10 }}>
             <p className="label" style={{ color: "var(--champagne)", marginBottom: 8 }}>
               CONNECT
             </p>
-            <a href="[INSTAGRAM_URL]" style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
+            <a href={settings.instagramUrl} style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
               Instagram
             </a>
-            <a href="[WHATSAPP_URL]" style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
+            <a href={settings.whatsappUrl} style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
               WhatsApp
             </a>
-            <a href="mailto:[EMAIL_ADDRESS]" style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
-              [EMAIL_ADDRESS]
+            <a href={`mailto:${settings.email}`} style={{ color: "rgba(244,241,234,0.7)", fontSize: 15 }}>
+              {settings.email}
             </a>
           </div>
         </div>
@@ -57,7 +62,7 @@ export function Footer() {
           }}
         >
           <p style={{ color: "rgba(244,241,234,0.5)", fontSize: 12, letterSpacing: "0.05em" }}>
-            &copy; 2026 ELPIS.CO
+            &copy; {year} {settings.siteName}
           </p>
           <Link href="/" className="label" style={{ color: "rgba(244,241,234,0.5)" }}>
             BACK TO TOP
