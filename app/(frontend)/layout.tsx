@@ -8,6 +8,8 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { getNavigation } from "@/lib/navigation";
 import { getSiteSettings } from "@/lib/siteSettings";
 import { getRootMetadata, getOrganizationJsonLd } from "@/lib/seo";
+import { getTrackingSettings } from "@/lib/tracking";
+import { TrackingHeadCode, TrackingBodyStart, TrackingBodyEnd } from "@/components/analytics/Tracking";
 
 export const dynamic = "force-dynamic";
 
@@ -46,10 +48,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [navItems, settings, organizationJsonLd] = await Promise.all([
+  const [navItems, settings, organizationJsonLd, tracking] = await Promise.all([
     getNavigation(),
     getSiteSettings(),
     getOrganizationJsonLd(),
+    getTrackingSettings(),
   ]);
 
   const fontOverride =
@@ -66,7 +69,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${instrumentSerif.variable} ${manrope.variable} ${playfairDisplay.variable} ${inter.variable}`}
       style={fontOverride}
     >
+      <head>
+        <TrackingHeadCode settings={tracking} />
+      </head>
       <body>
+        <TrackingBodyStart settings={tracking} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -89,6 +96,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main>{children}</main>
           <Footer settings={settings} />
         </SmoothScroll>
+        <TrackingBodyEnd settings={tracking} />
       </body>
     </html>
   );

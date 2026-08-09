@@ -95,11 +95,13 @@ export interface Config {
     navigation: Navigation;
     'site-settings': SiteSetting;
     seo: Seo;
+    tracking: Tracking;
   };
   globalsSelect: {
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
+    tracking: TrackingSelect<false> | TrackingSelect<true>;
   };
   locale: null;
   widgets: {
@@ -556,6 +558,34 @@ export interface Seo {
   createdAt?: string | null;
 }
 /**
+ * Analytics and marketing tags. Leave a field blank to skip it entirely — nothing renders until an ID is set.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracking".
+ */
+export interface Tracking {
+  id: number;
+  /**
+   * e.g. GTM-XXXXXXX
+   */
+  gtmId?: string | null;
+  /**
+   * e.g. G-XXXXXXXXXX. Only needed if GA4 isn't already wired through GTM above.
+   */
+  ga4Id?: string | null;
+  metaPixelId?: string | null;
+  /**
+   * Raw HTML/JS, e.g. a verification tag or a script snippet not covered above. Runs on every page. Use with caution.
+   */
+  customHeadCode?: string | null;
+  /**
+   * Raw HTML/JS, e.g. a chat widget embed. Runs on every page. Use with caution.
+   */
+  customBodyEndCode?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation_select".
  */
@@ -617,6 +647,20 @@ export interface SeoSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracking_select".
+ */
+export interface TrackingSelect<T extends boolean = true> {
+  gtmId?: T;
+  ga4Id?: T;
+  metaPixelId?: T;
+  customHeadCode?: T;
+  customBodyEndCode?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
