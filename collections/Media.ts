@@ -1,9 +1,7 @@
 import type { CollectionConfig } from "payload";
 
-// TODO: swap local disk storage for the Supabase Storage (S3-compatible)
-// adapter (@payloadcms/storage-s3) before deploying to Vercel — serverless
-// functions have no persistent local disk. Tracked as part of the Media
-// Manager module.
+// Local disk storage is only used in dev — payload.config.ts's s3Storage
+// plugin takes over for uploads whenever S3_BUCKET is set (production).
 export const Media: CollectionConfig = {
   slug: "media",
   access: {

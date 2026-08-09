@@ -42,11 +42,7 @@ const STORAGE_KEY = "elpis-assessment-progress";
 
 type SavedProgress = { answers: Answers; stepIndex: number };
 
-// Read once and reused by both lazy initializers below, rather than an
-// effect that would set state after the first render (and cause a visible
-// flash from empty -> hydrated state).
 function readSavedProgress(): SavedProgress | null {
-  if (typeof window === "undefined") return null;
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as SavedProgress) : null;
@@ -56,12 +52,14 @@ function readSavedProgress(): SavedProgress | null {
 }
 
 export function ProjectAssessment() {
-  const [answers, setAnswers] = useState<Answers>(
-    () => ({ ...EMPTY_ANSWERS, ...readSavedProgress()?.answers })
-  );
-  const [stepIndex, setStepIndex] = useState<number>(
-    () => Math.min(readSavedProgress()?.stepIndex ?? 0, ASSESSMENT_STEPS.length - 1)
-  );
+  // Always starts from EMPTY_ANSWERS / step 0 on both server and the first
+  // client render, so there is nothing for React to mismatch during
+  // hydration. sessionStorage is only readable client-side and its content
+  // is visitor-specific, so it cannot be part of the server-rendered HTML —
+  // restoring it has to happen post-mount, accepting a brief flash from
+  // empty to restored state on a refresh mid-wizard.
+  const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
+  const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -70,6 +68,21 @@ export function ProjectAssessment() {
 
   const total = ASSESSMENT_STEPS.length;
   const step = ASSESSMENT_STEPS[stepIndex];
+
+  useEffect(() => {
+    const saved = readSavedProgress();
+    if (saved) {
+      // One-time hydration from a browser-only store (sessionStorage) that
+      // cannot be read during SSR or the initial client render without
+      // causing a hydration mismatch; see the comment on the state above.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setAnswers((prev) => ({ ...prev, ...saved.answers }));
+      setStepIndex(Math.min(saved.stepIndex ?? 0, total - 1));
+    }
+    // Mount-only restore — intentionally excludes `total`, which is derived
+    // from the static ASSESSMENT_STEPS array and never changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!started.current) {
