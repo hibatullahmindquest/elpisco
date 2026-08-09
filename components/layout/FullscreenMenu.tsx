@@ -150,6 +150,9 @@ export function FullscreenMenu({
             <a href={whatsappUrl} className="label" style={{ color: "var(--soft-white)" }}>
               WHATSAPP
             </a>
+            <Link href="/careers" onClick={onClose} className="label" style={{ color: "var(--soft-white)" }}>
+              CAREERS
+            </Link>
           </div>
           <div data-menu-meta style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <span className="label" style={{ color: "rgba(244,241,234,0.5)" }}>

@@ -4,9 +4,11 @@ export type NavItem = { label: string; href: string };
 
 const FALLBACK_NAV: NavItem[] = [
   { label: "PROJECTS", href: "/projects" },
-  { label: "STUDIO", href: "/studio" },
+  { label: "ABOUT", href: "/about" },
   { label: "SERVICES", href: "/services" },
   { label: "PROCESS", href: "/process" },
+  { label: "WHY ELPIS", href: "/why-elpis" },
+  { label: "FAQ", href: "/faq" },
   { label: "CONTACT", href: "/contact" },
 ];
 

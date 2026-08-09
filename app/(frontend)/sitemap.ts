@@ -8,7 +8,17 @@ const BASE_URL = "https://elpisco.vercel.app";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getProjects();
 
-  const staticRoutes = ["", "/projects", "/services", "/studio", "/process", "/contact"].map((path) => ({
+  const staticRoutes = [
+    "",
+    "/about",
+    "/projects",
+    "/services",
+    "/process",
+    "/why-elpis",
+    "/faq",
+    "/contact",
+    "/careers",
+  ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: new Date(),
   }));
