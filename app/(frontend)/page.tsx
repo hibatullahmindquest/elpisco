@@ -5,8 +5,10 @@ import { FeaturedProject } from "@/components/home/FeaturedProject";
 import { Philosophy } from "@/components/home/Philosophy";
 import { Services } from "@/components/home/Services";
 import { Craft } from "@/components/home/Craft";
+import { WhyElpis } from "@/components/home/WhyElpis";
 import { Process } from "@/components/home/Process";
 import { Marquee } from "@/components/home/Marquee";
+import { Testimonials } from "@/components/home/Testimonials";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { getProjects } from "@/lib/projects";
 import { getPageMetadata } from "@/lib/seo";
@@ -33,8 +35,10 @@ export default async function Home() {
       <Philosophy />
       <Services />
       <Craft />
+      <WhyElpis />
       <Process />
       <Marquee />
+      <Testimonials />
       <FinalCTA />
     </>
   );

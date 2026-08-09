@@ -1,7 +1,11 @@
 import { RevealText } from "@/components/ui/RevealText";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { getSiteSettings } from "@/lib/siteSettings";
 
-export function FinalCTA() {
+export async function FinalCTA() {
+  const settings = await getSiteSettings();
+
   return (
     <section
       data-nav-theme="dark"
@@ -14,12 +18,29 @@ export function FinalCTA() {
       }}
     >
       <div className="container" style={{ textAlign: "center" }}>
-        <RevealText
-          as="h2"
-          className="h-section"
-          lines={["READY TO", "REIMAGINE", "YOUR HOME?"]}
-          style={{ color: "var(--soft-white)", textAlign: "center" }}
-        />
+        <SectionLabel theme="dark">Start a Project</SectionLabel>
+        <div style={{ marginTop: 20 }}>
+          <RevealText
+            as="h2"
+            className="h-section"
+            lines={["PLANNING A", "SIGNIFICANT", "RENOVATION?"]}
+            style={{ color: "var(--soft-white)", textAlign: "center" }}
+          />
+        </div>
+
+        <p
+          className="body-copy"
+          style={{
+            marginInline: "auto",
+            marginTop: "clamp(28px, 4vw, 40px)",
+            maxWidth: 480,
+            color: "rgba(244,241,234,0.65)",
+          }}
+        >
+          We work best with clients who value design, thoughtful planning and a properly managed
+          build. Tell us about your property, intended scope and investment range, and our team
+          will review whether Elpis is the right fit for your project.
+        </p>
 
         <div
           style={{
@@ -31,24 +52,13 @@ export function FinalCTA() {
           }}
         >
           <AnimatedLink href="/contact" variant="solid-invert">
-            START A PROJECT
+            BOOK A CONSULTATION
           </AnimatedLink>
-          <span style={{ display: "inline-flex" }}>
-            <AnimatedLinkOnDark href="[WHATSAPP_URL]">CONTINUE ON WHATSAPP</AnimatedLinkOnDark>
-          </span>
+          <AnimatedLink href={settings.whatsappUrl} external style={{ color: "var(--soft-white)" }}>
+            CONTINUE ON WHATSAPP
+          </AnimatedLink>
         </div>
       </div>
     </section>
-  );
-}
-
-function AnimatedLinkOnDark({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a href={href} className="cta" style={{ color: "var(--soft-white)" }} target="_blank" rel="noopener noreferrer">
-      <span className="cta-label">{children}</span>
-      <span className="cta-arrow" aria-hidden="true">
-        &#8599;
-      </span>
-    </a>
   );
 }

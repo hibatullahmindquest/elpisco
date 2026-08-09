@@ -27,16 +27,21 @@ export default async function ContactPage() {
       }}
     >
       <div className="container">
-        <SectionLabel>Contact</SectionLabel>
-        <RevealText as="h1" className="h-hero" lines={["START A", "PROJECT."]} style={{ color: "var(--ink)", marginTop: 14 }} />
+        <SectionLabel>Start a Project</SectionLabel>
+        <RevealText
+          as="h1"
+          className="h-hero"
+          lines={["TELL US", "ABOUT YOUR", "PROPERTY."]}
+          style={{ color: "var(--ink)", marginTop: 14 }}
+        />
         <p className="body-copy" style={{ marginTop: 24, maxWidth: 480 }}>
-          Tell us a little about your space and what you have in mind. We will get back to you to
-          arrange a consultation.
+          Share a few details about your project. We will review the scope, location, investment
+          range and intended timing before getting in touch about the next step.
         </p>
 
         <div style={{ marginTop: 16 }}>
           <a href={settings.whatsappUrl} className="cta" target="_blank" rel="noopener noreferrer">
-            <span className="cta-label">CONTINUE ON WHATSAPP</span>
+            <span className="cta-label">PREFER WHATSAPP? CONTINUE HERE</span>
             <span className="cta-arrow" aria-hidden="true">
               &#8599;
             </span>

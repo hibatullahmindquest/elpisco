@@ -39,6 +39,11 @@ export function FeaturedProject({
           <Link href={`/projects/${project.slug}`} className="project-link" data-cursor="view" style={{ display: "block", marginInline: "auto", width: "clamp(85%, 90vw, 92%)" }}>
             <ParallaxImage src={project.hero} alt={`${project.title} interior`} aspect="16 / 10" parallax sizes="92vw" />
           </Link>
+          {project.description && (
+            <p className="body-copy" style={{ marginTop: 24, maxWidth: 480 }}>
+              {project.description}
+            </p>
+          )}
         </div>
       </section>
     );
@@ -81,6 +86,11 @@ export function FeaturedProject({
             <p className="label" style={{ color: "var(--muted)" }}>{project.location}</p>
             <p className="label" style={{ color: "var(--muted)" }}>{project.year}</p>
           </div>
+          {project.description && (
+            <p className="body-copy" style={{ marginTop: 20, maxWidth: 380 }}>
+              {project.description}
+            </p>
+          )}
         </div>
       </div>
     </section>

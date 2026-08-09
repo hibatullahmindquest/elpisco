@@ -2,12 +2,34 @@
 
 import { useEffect, useRef, useState } from "react";
 import { RevealText } from "@/components/ui/RevealText";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const STEPS = [
-  { n: "01", title: "DISCOVER", copy: "Consultation, needs, property context, budget and expectations." },
-  { n: "02", title: "DESIGN", copy: "Space planning, mood direction, material direction and design refinement." },
-  { n: "03", title: "BUILD", copy: "Site execution, coordination, workmanship and progress updates." },
-  { n: "04", title: "DELIVER", copy: "Inspection, rectification, styling and handover." },
+  {
+    n: "01",
+    title: "DISCOVER",
+    copy: "Initial consultation, project objectives, property assessment, budget alignment and scope definition.",
+  },
+  {
+    n: "02",
+    title: "DEFINE",
+    copy: "Space planning, concept direction, mood and material direction, and preliminary design development.",
+  },
+  {
+    n: "03",
+    title: "DETAIL",
+    copy: "Detailed design, cabinetry design, material selection, lighting direction and quotation alignment.",
+  },
+  {
+    n: "04",
+    title: "BUILD",
+    copy: "Site mobilisation, construction, project coordination, progress updates and quality reviews.",
+  },
+  {
+    n: "05",
+    title: "DELIVER",
+    copy: "Final inspection, defect and rectification checks, final detailing, handover and warranty documentation.",
+  },
 ];
 
 export function Process() {
@@ -34,11 +56,12 @@ export function Process() {
   return (
     <section data-nav-theme="light" style={{ background: "var(--warm-white)" }}>
       <div className="container" style={{ paddingBlock: "clamp(64px, 10vw, 120px) 0" }}>
+        <SectionLabel>How We Work</SectionLabel>
         <RevealText
           as="h2"
           className="h-medium"
-          lines={["HOW", "WE WORK"]}
-          style={{ color: "var(--ink)" }}
+          lines={["ONE PROCESS. FROM FIRST", "IDEA TO FINAL HANDOVER."]}
+          style={{ color: "var(--ink)", marginTop: 14 }}
         />
       </div>
 

@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { RevealText } from "@/components/ui/RevealText";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
 
 const SERVICES = [
   { n: "01", label: "INTERIOR DESIGN" },
-  { n: "02", label: "RENOVATION & BUILD" },
-  { n: "03", label: "SPACE PLANNING" },
-  { n: "04", label: "PROJECT MANAGEMENT" },
+  { n: "02", label: "RENOVATION" },
+  { n: "03", label: "DESIGN & BUILD" },
+  { n: "04", label: "CUSTOM CABINETRY" },
+  { n: "05", label: "PROJECT MANAGEMENT" },
 ];
 
 export function Services() {
@@ -15,9 +18,14 @@ export function Services() {
       style={{ background: "var(--warm-white)", paddingBlock: "clamp(80px, 12vw, 140px)" }}
     >
       <div className="container">
-        <RevealText as="h2" className="h-medium" lines={["OUR EXPERTISE"]} style={{ color: "var(--ink)", marginBottom: "clamp(40px, 6vw, 64px)" }} />
+        <SectionLabel>Our Expertise</SectionLabel>
+        <RevealText as="h2" className="h-medium" lines={["OUR EXPERTISE"]} style={{ color: "var(--ink)", marginTop: 14 }} />
+        <p className="body-copy" style={{ marginTop: 20, maxWidth: 460 }}>
+          From early planning to final handover, Elpis can lead the entire renovation journey or
+          support the stage your project needs most.
+        </p>
 
-        <div>
+        <div style={{ marginTop: "clamp(40px, 6vw, 64px)" }}>
           {SERVICES.map((s) => (
             <Link key={s.n} href="/services" className="row-link">
               <span style={{ display: "flex", alignItems: "baseline", gap: 28 }}>
@@ -31,6 +39,10 @@ export function Services() {
               </span>
             </Link>
           ))}
+        </div>
+
+        <div style={{ marginTop: "clamp(32px, 5vw, 48px)" }}>
+          <AnimatedLink href="/services">EXPLORE OUR SERVICES</AnimatedLink>
         </div>
       </div>
     </section>

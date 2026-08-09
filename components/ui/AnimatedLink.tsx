@@ -7,10 +7,12 @@ type AnimatedLinkProps = {
   /** "solid" = navy fill, for light backgrounds. "solid-invert" = champagne fill, for navy/dark backgrounds. */
   variant?: "cta" | "solid" | "solid-invert";
   className?: string;
+  /** Text color override — needed for the plain "cta" variant on a dark background, since it otherwise inherits ink. */
+  style?: React.CSSProperties;
   external?: boolean;
 };
 
-export function AnimatedLink({ href, children, variant = "cta", className, external = false }: AnimatedLinkProps) {
+export function AnimatedLink({ href, children, variant = "cta", className, style, external = false }: AnimatedLinkProps) {
   const classes = cn(
     "cta",
     variant === "solid" && "cta-solid",
@@ -28,14 +30,14 @@ export function AnimatedLink({ href, children, variant = "cta", className, exter
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} style={style}>
         {content}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} style={style}>
       {content}
     </Link>
   );

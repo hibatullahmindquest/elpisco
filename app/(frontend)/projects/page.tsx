@@ -24,7 +24,16 @@ export default async function ProjectsPage() {
       <section data-nav-theme="light" style={{ background: "var(--warm-white)", paddingTop: "calc(var(--header-h) + clamp(48px, 10vw, 96px))", paddingBottom: "clamp(48px, 8vw, 88px)" }}>
         <div className="container">
           <SectionLabel>Selected work</SectionLabel>
-          <RevealText as="h1" className="h-hero" lines={["SELECTED", "WORK"]} style={{ color: "var(--ink)", marginTop: 14 }} />
+          <RevealText
+            as="h1"
+            className="h-hero"
+            lines={["HOMES,", "CONSIDERED", "AS A WHOLE."]}
+            style={{ color: "var(--ink)", marginTop: 14 }}
+          />
+          <p className="body-copy" style={{ marginTop: 24, maxWidth: 460 }}>
+            A selection of residential projects shaped through design, renovation and detailed
+            execution.
+          </p>
         </div>
       </section>
 

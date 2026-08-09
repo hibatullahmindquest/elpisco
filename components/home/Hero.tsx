@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { RevealText } from "@/components/ui/RevealText";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 export function Hero() {
@@ -77,6 +78,26 @@ export function Hero() {
           delay={0.15}
           lines={["SPACES", "SHAPED", "AROUND YOU."]}
         />
+
+        <div
+          style={{
+            marginTop: "clamp(28px, 4vw, 44px)",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "clamp(20px, 3vw, 40px)",
+          }}
+        >
+          <AnimatedLink href="/contact" variant="solid-invert">
+            BOOK A CONSULTATION
+          </AnimatedLink>
+          <AnimatedLink href="/projects" style={{ color: "var(--soft-white)" }}>
+            VIEW SELECTED WORK
+          </AnimatedLink>
+          <p className="label" style={{ color: "rgba(244,241,234,0.6)" }}>
+            SHAH ALAM &middot; MALAYSIA
+          </p>
+        </div>
       </div>
 
       <div

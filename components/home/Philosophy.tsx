@@ -36,9 +36,10 @@ export function Philosophy() {
               color: "rgba(244,241,234,0.65)",
             }}
           >
-            We believe a well-designed home should feel effortless. From spatial planning to
-            material selection and site execution, every decision is made to create clarity,
-            comfort and lasting value.
+            A home should feel effortless because the difficult decisions have already been
+            considered. We study proportion, movement, light, storage, material and construction
+            as one connected system — creating spaces that look resolved because they are
+            resolved.
           </p>
         </div>
       </div>

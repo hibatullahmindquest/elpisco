@@ -23,12 +23,16 @@ export function Craft() {
           <RevealText
             as="h2"
             className="h-section"
-            lines={["MATERIAL", "MATTERS."]}
-            style={{ color: "var(--ink)", marginTop: 14, fontSize: "clamp(36px, 5.5vw, 88px)" }}
+            lines={["THE DIFFERENCE IS", "IN WHAT GETS", "RESOLVED."]}
+            style={{ color: "var(--ink)", marginTop: 14, fontSize: "clamp(32px, 5vw, 76px)" }}
           />
-          <p className="body-copy" style={{ marginTop: 28, maxWidth: 340 }}>
-            The quality of a space lives in the details: how materials meet, how light falls, how
-            storage disappears and how every surface is resolved.
+          <p className="body-copy" style={{ marginTop: 28, maxWidth: 380 }}>
+            The quality of a home often lives in the details that are easiest to overlook — the
+            alignment of a shadow gap, the proportion of a cabinet, the transition between two
+            materials, the warmth of a light source, the way a door closes.
+          </p>
+          <p className="body-copy" style={{ marginTop: 16, maxWidth: 380 }}>
+            We treat these decisions as part of the architecture, not decoration added at the end.
           </p>
         </div>
       </div>

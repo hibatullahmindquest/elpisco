@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return getPageMetadata("/services", {
     title: "Services",
     description:
-      "Interior design, renovation & build, space planning and project management, from Elpis.co.",
+      "Interior design, renovation, design & build, custom cabinetry and project management, from Elpis.co.",
   });
 }
 
@@ -19,34 +19,99 @@ const SERVICES = [
   {
     n: "01",
     title: "INTERIOR DESIGN",
-    covers:
-      "Spatial planning, material direction, lighting and a considered palette resolved down to the smallest detail.",
-    who: "For homeowners who want a coherent design vision before a single wall moves.",
+    intro:
+      "A complete design direction developed around the property, the people living in it and the way each space needs to perform.",
+    scope: [
+      "Design consultation",
+      "Site study",
+      "Space planning",
+      "Concept development",
+      "Mood and visual direction",
+      "Material and finish selection",
+      "Lighting direction",
+      "Furniture planning",
+      "Custom joinery design",
+      "Design detailing",
+      "3D visualisation where included in scope",
+      "Documentation",
+    ],
+    suited: "Owners who want the design properly resolved before construction begins.",
+    highlight: null,
     image: "/images/hero/main.jpg",
   },
   {
     n: "02",
-    title: "RENOVATION & BUILD",
-    covers:
-      "Full or partial renovation, structural coordination and on-site execution, managed from first day to handover.",
-    who: "For homeowners renovating an existing property who want one studio accountable for design and build.",
+    title: "RENOVATION",
+    intro:
+      "From major interior transformation to comprehensive property renovation, we coordinate execution with close attention to buildability, workmanship and design intent.",
+    scope: [
+      "Demolition",
+      "Masonry and wet works",
+      "Ceiling and partition works",
+      "Electrical",
+      "Plumbing",
+      "Tiling / stone works",
+      "Flooring",
+      "Painting",
+      "Carpentry installation",
+      "Doors and glazing",
+      "Selected M&E coordination",
+      "Finishing",
+      "Rectification and handover",
+    ],
+    suited: "Existing homes requiring significant transformation, upgrading or reconfiguration.",
+    highlight: null,
     image: "/images/projects/serene-residence/hero.jpg",
   },
   {
     n: "03",
-    title: "SPACE PLANNING",
-    covers:
-      "Layout studies, flow and proportion, storage strategy and furniture planning tailored to how a home is actually used.",
-    who: "For homeowners reworking layout before committing to a full design and build scope.",
+    title: "DESIGN & BUILD",
+    intro:
+      "One integrated appointment covering design development and site delivery. By keeping key decisions within one coordinated team, the design can be developed with construction realities in mind and site execution can be measured against a clear creative direction.",
+    scope: [],
+    suited: "Clients who prefer one accountable partner from concept to handover.",
+    highlight: "ONE VISION. ONE COORDINATED TEAM. ONE COMPLETE DELIVERY.",
     image: "/images/projects/modern-sanctuary/hero.jpg",
   },
   {
     n: "04",
-    title: "PROJECT MANAGEMENT",
-    covers:
-      "Coordination between design, contractors and vendors, with progress updates and quality control throughout.",
-    who: "For homeowners who want a single point of contact from concept through to completion.",
+    title: "CUSTOM CABINETRY",
+    intro:
+      "Joinery designed as part of the room rather than added to it. We develop cabinetry around function, proportion, storage behaviour, material, hardware and architectural alignment.",
+    scope: [
+      "Kitchens",
+      "Wardrobes",
+      "TV / living storage",
+      "Study and home office",
+      "Vanity units",
+      "Display cabinetry",
+      "Concealed storage",
+      "Feature joinery",
+    ],
+    suited: null,
+    highlight: null,
     image: "/images/details/material-detail.jpg",
+  },
+  {
+    n: "05",
+    title: "PROJECT MANAGEMENT",
+    intro:
+      "Renovation involves hundreds of connected decisions. Our role is to keep those decisions moving in the right sequence while maintaining visibility across programme, site coordination and quality.",
+    scope: [
+      "Project planning",
+      "Site coordination",
+      "Vendor coordination",
+      "Work sequencing",
+      "Progress tracking",
+      "Client updates",
+      "Design clarification",
+      "Quality inspections",
+      "Rectification tracking",
+      "Handover coordination",
+    ],
+    suited: null,
+    highlight: null,
+    image: "/images/projects/coastal-retreat/hero.jpg",
   },
 ];
 
@@ -63,7 +128,16 @@ export default function ServicesPage() {
       >
         <div className="container">
           <SectionLabel>What we do</SectionLabel>
-          <RevealText as="h1" className="h-hero" lines={["OUR", "EXPERTISE"]} style={{ color: "var(--ink)", marginTop: 14 }} />
+          <RevealText
+            as="h1"
+            className="h-hero"
+            lines={["FROM SPACE", "TO STRUCTURE", "TO FINISH."]}
+            style={{ color: "var(--ink)", marginTop: 14 }}
+          />
+          <p className="body-copy" style={{ marginTop: 24, maxWidth: 460 }}>
+            Elpis provides an integrated range of design and renovation services for homeowners
+            who want fewer handovers, clearer accountability and one coherent result.
+          </p>
         </div>
       </section>
 
@@ -82,12 +156,28 @@ export default function ServicesPage() {
               <h2 className="h-medium" style={{ color: "var(--ink)", marginTop: 12 }}>
                 {service.title}
               </h2>
-              <p className="body-copy" style={{ marginTop: 20, maxWidth: 380 }}>
-                {service.covers}
+              <p className="body-copy" style={{ marginTop: 20, maxWidth: 420 }}>
+                {service.intro}
               </p>
-              <p className="body-copy" style={{ marginTop: 14, maxWidth: 380, color: "var(--champagne-ink)" }}>
-                {service.who}
-              </p>
+
+              {service.highlight && (
+                <p className="label" style={{ marginTop: 20, color: "var(--champagne-ink)" }}>
+                  {service.highlight}
+                </p>
+              )}
+
+              {service.scope.length > 0 && (
+                <p className="body-copy" style={{ marginTop: 20, maxWidth: 420, fontSize: 13 }}>
+                  {service.scope.join(" · ")}
+                </p>
+              )}
+
+              {service.suited && (
+                <p className="body-copy" style={{ marginTop: 14, maxWidth: 420, color: "var(--champagne-ink)" }}>
+                  {service.suited}
+                </p>
+              )}
+
               <div style={{ marginTop: 28 }}>
                 <AnimatedLink href="/contact">START A PROJECT</AnimatedLink>
               </div>
@@ -95,6 +185,32 @@ export default function ServicesPage() {
           </div>
         </section>
       ))}
+
+      <section
+        data-nav-theme="dark"
+        style={{ background: "var(--navy)", paddingBlock: "clamp(80px, 12vw, 140px)", textAlign: "center" }}
+      >
+        <div className="container">
+          <RevealText
+            as="h2"
+            className="h-section"
+            lines={["NOT SURE WHICH", "SCOPE YOU NEED?"]}
+            style={{ color: "var(--soft-white)", textAlign: "center" }}
+          />
+          <p
+            className="body-copy"
+            style={{ marginInline: "auto", marginTop: 28, maxWidth: 420, color: "rgba(244,241,234,0.65)" }}
+          >
+            Start with the property and the outcome you want. We will help determine the most
+            appropriate scope during the initial consultation.
+          </p>
+          <div style={{ marginTop: 40 }}>
+            <AnimatedLink href="/contact" variant="solid-invert">
+              DISCUSS YOUR PROJECT
+            </AnimatedLink>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

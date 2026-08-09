@@ -1,5 +1,6 @@
 import { RevealText } from "@/components/ui/RevealText";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
 
 export function Intro() {
   return (
@@ -9,7 +10,7 @@ export function Intro() {
     >
       <div className="container grid-12">
         <div className="col-line-label">
-          <SectionLabel>01 / Studio</SectionLabel>
+          <SectionLabel>01 / Elpis</SectionLabel>
         </div>
 
         <div className="col-line-4-end">
@@ -22,7 +23,7 @@ export function Intro() {
           <RevealText
             as="h2"
             className="h-section"
-            lines={["WE RESHAPE", "THE WAY YOU LIVE."]}
+            lines={["WE SHAPE HOW", "THEY ARE LIVED IN."]}
             style={{ color: "var(--champagne-ink)", marginTop: "0.15em" }}
             delay={0.15}
           />
@@ -31,10 +32,18 @@ export function Intro() {
             className="body-copy"
             style={{ marginTop: "clamp(40px, 6vw, 72px)", maxWidth: 420, marginLeft: "auto" }}
           >
-            Elpis creates considered residential spaces through interior design, renovation and
-            build. Every project is shaped around proportion, material, detail and the everyday
-            rituals of the people who live there.
+            Elpis is a design-led interior and renovation studio creating considered homes across
+            Malaysia. We bring design, planning, construction and project coordination into one
+            clear process — so every decision, material and detail works as part of a complete
+            whole.
           </p>
+          <p className="body-copy" style={{ marginTop: 20, maxWidth: 420, marginLeft: "auto" }}>
+            For us, a successful renovation is not defined by how much is added. It is defined by
+            what is resolved.
+          </p>
+          <div style={{ marginTop: 32, textAlign: "right" }}>
+            <AnimatedLink href="/about">DISCOVER ELPIS</AnimatedLink>
+          </div>
         </div>
       </div>
     </section>
