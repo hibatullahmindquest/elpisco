@@ -2,12 +2,14 @@ import type { AssessmentOption } from "@/data/projectAssessment";
 
 export function MultiChoiceField({
   name,
+  groupLabel,
   options,
   values,
   onChange,
   exclusiveValue,
 }: {
   name: string;
+  groupLabel: string;
   options: AssessmentOption[];
   values: string[];
   onChange: (values: string[]) => void;
@@ -31,7 +33,7 @@ export function MultiChoiceField({
   }
 
   return (
-    <div role="group" aria-label={name}>
+    <div role="group" aria-label={groupLabel}>
       {options.map((option) => {
         const selected = values.includes(option.value);
         return (

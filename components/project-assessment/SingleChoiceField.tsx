@@ -2,17 +2,19 @@ import type { AssessmentOption } from "@/data/projectAssessment";
 
 export function SingleChoiceField({
   name,
+  groupLabel,
   options,
   value,
   onChange,
 }: {
   name: string;
+  groupLabel: string;
   options: AssessmentOption[];
   value: string;
   onChange: (value: string) => void;
 }) {
   return (
-    <div role="radiogroup" aria-label={name}>
+    <div role="radiogroup" aria-label={groupLabel}>
       {options.map((option) => {
         const selected = value === option.value;
         return (

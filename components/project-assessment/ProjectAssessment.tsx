@@ -217,6 +217,7 @@ export function ProjectAssessment() {
           <SectionLabel theme="dark">{step.label}</SectionLabel>
           <div style={{ marginTop: 16 }}>
             <RevealText
+              key={step.id}
               as="h1"
               className="h-section"
               immediate
@@ -234,6 +235,7 @@ export function ProjectAssessment() {
             {step.type === "single" && (
               <SingleChoiceField
                 name={step.id}
+                groupLabel={step.question.join(" ")}
                 options={step.options}
                 value={answers[step.id as keyof Answers] as string}
                 onChange={(value) => {
@@ -248,6 +250,7 @@ export function ProjectAssessment() {
             {step.type === "multi" && (
               <MultiChoiceField
                 name={step.id}
+                groupLabel={step.question.join(" ")}
                 options={step.options}
                 values={answers[step.id as keyof Answers] as string[]}
                 exclusiveValue={step.exclusiveValue}
