@@ -45,7 +45,13 @@ export default buildConfig({
       enabled: Boolean(process.env.S3_BUCKET),
       bucket: process.env.S3_BUCKET || "",
       collections: {
-        media: true,
+        media: {
+          // Supabase's S3-compatible endpoint requires AWS SigV4-signed
+          // requests, even for GETs — a plain <img> tag can't load from it.
+          // Point reads at Supabase's public object REST endpoint instead.
+          generateFileURL: ({ filename }) =>
+            `${process.env.S3_PUBLIC_URL_BASE}/${filename}`,
+        },
       },
       config: {
         endpoint: process.env.S3_ENDPOINT,
