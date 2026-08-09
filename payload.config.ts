@@ -12,6 +12,10 @@ import { Projects } from "./collections/Projects";
 import { Pages } from "./collections/Pages";
 import { Redirects } from "./collections/Redirects";
 import { Enquiries } from "./collections/Enquiries";
+import { FAQ } from "./collections/FAQ";
+import { Testimonials } from "./collections/Testimonials";
+import { Credentials } from "./collections/Credentials";
+import { Careers } from "./collections/Careers";
 import { Navigation } from "./globals/Navigation";
 import { SiteSettings } from "./globals/SiteSettings";
 import { SEO } from "./globals/SEO";
@@ -28,7 +32,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname, "app/(payload)"),
     },
   },
-  collections: [Users, Media, Projects, Pages, Redirects, Enquiries],
+  collections: [
+    Users,
+    Media,
+    Projects,
+    Pages,
+    Redirects,
+    Enquiries,
+    FAQ,
+    Testimonials,
+    Credentials,
+    Careers,
+  ],
   globals: [Navigation, SiteSettings, SEO, Tracking],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

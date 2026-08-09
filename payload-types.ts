@@ -73,6 +73,10 @@ export interface Config {
     pages: Page;
     redirects: Redirect;
     enquiries: Enquiry;
+    faq: Faq;
+    testimonials: Testimonial;
+    credentials: Credential;
+    careers: Career;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +90,10 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    credentials: CredentialsSelect<false> | CredentialsSelect<true>;
+    careers: CareersSelect<false> | CareersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -296,6 +304,115 @@ export interface Enquiry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: number;
+  question: string;
+  answer: string;
+  /**
+   * Groups FAQs on the page, e.g. "Pricing", "Process", "Timeline". Leave blank for uncategorised.
+   */
+  category?: string | null;
+  /**
+   * Controls display order within its category — lower numbers show first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Client testimonials. Keep unpublished until a real client quote is on file — never fabricate a testimonial.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  /**
+   * Only published testimonials appear on the site.
+   */
+  published?: boolean | null;
+  /**
+   * Controls display order — lower numbers show first.
+   */
+  order?: number | null;
+  quote: string;
+  authorName: string;
+  /**
+   * e.g. "Homeowner, Petaling Jaya"
+   */
+  authorDetail?: string | null;
+  relatedProject?: (number | null) | Project;
+  /**
+   * Optional 1–5 star rating.
+   */
+  rating?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Licences, registrations, and certifications. Keep unpublished until the real credential is on file — never fabricate one.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credentials".
+ */
+export interface Credential {
+  id: number;
+  /**
+   * Only published credentials appear on the site.
+   */
+  published?: boolean | null;
+  /**
+   * Controls display order — lower numbers show first.
+   */
+  order?: number | null;
+  /**
+   * e.g. "SSM Registration", "CIDB Licence"
+   */
+  label: string;
+  /**
+   * e.g. a registration or licence number.
+   */
+  value?: string | null;
+  issuer?: string | null;
+  icon?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careers".
+ */
+export interface Career {
+  id: number;
+  jobTitle: string;
+  slug: string;
+  status?: ('open' | 'closed') | null;
+  /**
+   * Controls display order — lower numbers show first.
+   */
+  order?: number | null;
+  department?: string | null;
+  location?: string | null;
+  employmentType?: ('Full-time' | 'Part-time' | 'Internship' | 'Contract') | null;
+  /**
+   * Short one- or two-line summary shown in the job listing.
+   */
+  summary?: string | null;
+  /**
+   * Full responsibilities and requirements.
+   */
+  description?: string | null;
+  /**
+   * Overrides the site's default enquiry email for this listing, if set.
+   */
+  applyEmail?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -341,6 +458,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'enquiries';
         value: number | Enquiry;
+      } | null)
+    | ({
+        relationTo: 'faq';
+        value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'credentials';
+        value: number | Credential;
+      } | null)
+    | ({
+        relationTo: 'careers';
+        value: number | Career;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -507,6 +640,65 @@ export interface EnquiriesSelect<T extends boolean = true> {
   timing?: T;
   details?: T;
   company?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  category?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  published?: T;
+  order?: T;
+  quote?: T;
+  authorName?: T;
+  authorDetail?: T;
+  relatedProject?: T;
+  rating?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credentials_select".
+ */
+export interface CredentialsSelect<T extends boolean = true> {
+  published?: T;
+  order?: T;
+  label?: T;
+  value?: T;
+  issuer?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careers_select".
+ */
+export interface CareersSelect<T extends boolean = true> {
+  jobTitle?: T;
+  slug?: T;
+  status?: T;
+  order?: T;
+  department?: T;
+  location?: T;
+  employmentType?: T;
+  summary?: T;
+  description?: T;
+  applyEmail?: T;
   updatedAt?: T;
   createdAt?: T;
 }
