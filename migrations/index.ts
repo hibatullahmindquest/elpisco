@@ -25,6 +25,7 @@ import * as migration_20260809_102648_add_sticky_step_list_block from './2026080
 import * as migration_20260809_102700_restore_home_process_sticky_scroll from './20260809_102700_restore_home_process_sticky_scroll';
 import * as migration_20260809_105102_add_playfair_montserrat_font_preset from './20260809_105102_add_playfair_montserrat_font_preset';
 import * as migration_20260809_135134_add_color_preset from './20260809_135134_add_color_preset';
+import * as migration_20260809_140416_add_header_behavior from './20260809_140416_add_header_behavior';
 
 export const migrations = [
   {
@@ -160,6 +161,11 @@ export const migrations = [
   {
     up: migration_20260809_135134_add_color_preset.up,
     down: migration_20260809_135134_add_color_preset.down,
-    name: '20260809_135134_add_color_preset'
+    name: '20260809_135134_add_color_preset',
+  },
+  {
+    up: migration_20260809_140416_add_header_behavior.up,
+    down: migration_20260809_140416_add_header_behavior.down,
+    name: '20260809_140416_add_header_behavior'
   },
 ];

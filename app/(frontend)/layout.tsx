@@ -112,6 +112,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             navItems={navItems}
             siteName={settings.siteName}
             logoUrl={settings.logoUrl}
+            behavior={settings.headerBehavior}
             contact={{
               instagramUrl: settings.instagramUrl,
               whatsappUrl: settings.whatsappUrl,

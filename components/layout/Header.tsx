@@ -10,14 +10,36 @@ export function Header({
   siteName,
   logoUrl,
   contact,
+  behavior = "frosted",
 }: {
   navItems: NavItem[];
   siteName: string;
   logoUrl: string | null;
   contact: { instagramUrl: string; whatsappUrl: string; city: string; country: string };
+  behavior?: "frosted" | "hide-on-scroll";
 }) {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    if (behavior === "frosted") {
+      const onScroll = () => setScrolled(window.scrollY > 40);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHidden(y > lastY && y > 120);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [behavior]);
 
   useEffect(() => {
     const headerH =
@@ -61,6 +83,8 @@ export function Header({
 
   const isDark = menuOpen ? true : theme === "dark";
   const color = isDark ? "var(--soft-white)" : "var(--navy)";
+  const showBackdrop = behavior === "frosted" && scrolled && !menuOpen;
+  const isHidden = behavior === "hide-on-scroll" && hidden && !menuOpen;
 
   return (
     <>
@@ -75,7 +99,16 @@ export function Header({
           display: "flex",
           alignItems: "center",
           color,
-          transition: "color 0.4s var(--ease-premium)",
+          background: showBackdrop
+            ? isDark
+              ? "color-mix(in srgb, var(--navy) 72%, transparent)"
+              : "color-mix(in srgb, var(--warm-white) 82%, transparent)"
+            : "transparent",
+          backdropFilter: showBackdrop ? "blur(12px)" : undefined,
+          WebkitBackdropFilter: showBackdrop ? "blur(12px)" : undefined,
+          transform: isHidden ? "translateY(-100%)" : "translateY(0)",
+          transition:
+            "color 0.4s var(--ease-premium), background 0.4s var(--ease-premium), transform 0.4s var(--ease-premium)",
           pointerEvents: "none",
         }}
       >

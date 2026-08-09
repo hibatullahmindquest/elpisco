@@ -55,6 +55,19 @@ export const SiteSettings: GlobalConfig = {
       },
     },
     {
+      name: "headerBehavior",
+      type: "select",
+      defaultValue: "frosted",
+      options: [
+        { label: "Frosted glass on scroll (default)", value: "frosted" },
+        { label: "Hide on scroll down, show on scroll up", value: "hide-on-scroll" },
+      ],
+      admin: {
+        description:
+          "How the fixed header avoids clashing with page content as you scroll. Frosted glass gives it a blurred background once you scroll past the hero. Hide-on-scroll tucks it away while scrolling down and brings it back when you scroll up.",
+      },
+    },
+    {
       type: "group",
       name: "contact",
       fields: [

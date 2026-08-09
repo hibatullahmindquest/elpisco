@@ -1569,6 +1569,10 @@ export interface SiteSetting {
    * A curated set of color palettes. Elpis Editorial is the site's original dark-navy tone; Client Brand Palette applies the exact brand hex codes (#183A6B navy, #F7F3EA ivory, #1C1C1C charcoal, #C8A96A gold) site-wide.
    */
   colorPreset?: ('elpis-editorial' | 'client-palette') | null;
+  /**
+   * How the fixed header avoids clashing with page content as you scroll. Frosted glass gives it a blurred background once you scroll past the hero. Hide-on-scroll tucks it away while scrolling down and brings it back when you scroll up.
+   */
+  headerBehavior?: ('frosted' | 'hide-on-scroll') | null;
   contact?: {
     email?: string | null;
     whatsappUrl?: string | null;
@@ -1680,6 +1684,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   tagline?: T;
   fontPreset?: T;
   colorPreset?: T;
+  headerBehavior?: T;
   contact?:
     | T
     | {
