@@ -7,7 +7,9 @@ import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { getPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
 import { getCredentials } from "@/lib/credentials";
 import { getFounders } from "@/lib/founders";
+import { getPageByPath } from "@/lib/pages";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RenderBlocks } from "@/components/blocks/RenderBlocks";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +47,21 @@ const BACKGROUND_DATA = [
 ];
 
 export default async function AboutPage() {
+  const page = await getPageByPath("/about");
+
+  // The page body now lives in the CMS as blocks (see /admin > Pages >
+  // About). This hardcoded JSX only remains as a safety net for the rare
+  // case the Page document is missing or its layout is empty — it should
+  // never be the normal path once the seed migration has run.
+  if (page?.layout && page.layout.length > 0) {
+    return (
+      <>
+        <JsonLd data={breadcrumbJsonLd} />
+        <RenderBlocks blocks={page.layout} />
+      </>
+    );
+  }
+
   const [credentials, founders] = await Promise.all([getCredentials(), getFounders()]);
 
   return (

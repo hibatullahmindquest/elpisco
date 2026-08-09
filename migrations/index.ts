@@ -7,6 +7,8 @@ import * as migration_20260809_043924_add_redirects_enquiries from './20260809_0
 import * as migration_20260809_053152_add_faq_testimonials_credentials_careers from './20260809_053152_add_faq_testimonials_credentials_careers';
 import * as migration_20260809_064509_extend_enquiries_for_assessment_wizard from './20260809_064509_extend_enquiries_for_assessment_wizard';
 import * as migration_20260809_073329_add_founders_and_homepage from './20260809_073329_add_founders_and_homepage';
+import * as migration_20260809_090422_add_pages_layout_blocks from './20260809_090422_add_pages_layout_blocks';
+import * as migration_20260809_091500_seed_about_page_content from './20260809_091500_seed_about_page_content';
 
 export const migrations = [
   {
@@ -52,6 +54,16 @@ export const migrations = [
   {
     up: migration_20260809_073329_add_founders_and_homepage.up,
     down: migration_20260809_073329_add_founders_and_homepage.down,
-    name: '20260809_073329_add_founders_and_homepage'
+    name: '20260809_073329_add_founders_and_homepage',
+  },
+  {
+    up: migration_20260809_090422_add_pages_layout_blocks.up,
+    down: migration_20260809_090422_add_pages_layout_blocks.down,
+    name: '20260809_090422_add_pages_layout_blocks',
+  },
+  {
+    up: migration_20260809_091500_seed_about_page_content.up,
+    down: migration_20260809_091500_seed_about_page_content.down,
+    name: '20260809_091500_seed_about_page_content',
   },
 ];

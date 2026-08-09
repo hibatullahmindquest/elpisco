@@ -1,9 +1,19 @@
 import type { CollectionConfig } from "payload";
+import { HeroBlock } from "../blocks/Hero";
+import { ImageBreakBlock } from "../blocks/ImageBreak";
+import { TextSectionBlock } from "../blocks/TextSection";
+import { FounderGridBlock } from "../blocks/FounderGrid";
+import { CredentialsGridBlock } from "../blocks/CredentialsGrid";
+import { SplitTextBlock } from "../blocks/SplitText";
+import { NumberedListBlock } from "../blocks/NumberedList";
+import { CTABannerBlock } from "../blocks/CTABanner";
 
-// Metadata scaffold: lets an admin manage page names, publish status, and
-// per-page SEO — it does NOT control section-by-section body content or
-// layout, which stays hand-built (see the module plan's Section Registry
-// discussion for why: preserves the GSAP-driven design).
+// Manages page names, publish status, per-page SEO, AND (via `layout`) the
+// page's body content as an ordered list of blocks — each block maps to a
+// specific, already-animated frontend component (see
+// components/blocks/RenderBlocks.tsx), so editors get structured, page-
+// builder-style editing without losing the GSAP-driven design to a generic
+// rich-text blob.
 export const Pages: CollectionConfig = {
   slug: "pages",
   access: {
@@ -62,6 +72,23 @@ export const Pages: CollectionConfig = {
           type: "upload",
           relationTo: "media",
         },
+      ],
+    },
+    {
+      name: "layout",
+      type: "blocks",
+      admin: {
+        description: "The page body, section by section. Add, remove and reorder blocks to change the page.",
+      },
+      blocks: [
+        HeroBlock,
+        ImageBreakBlock,
+        TextSectionBlock,
+        FounderGridBlock,
+        CredentialsGridBlock,
+        SplitTextBlock,
+        NumberedListBlock,
+        CTABannerBlock,
       ],
     },
   ],

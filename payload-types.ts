@@ -260,6 +260,162 @@ export interface Page {
     metaDescription?: string | null;
     ogImage?: (number | null) | Media;
   };
+  /**
+   * The page body, section by section. Add, remove and reorder blocks to change the page.
+   */
+  layout?:
+    | (
+        | {
+            /**
+             * Small uppercase label above the headline, e.g. "About Elpis".
+             */
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            body?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            image: number | Media;
+            alt: string;
+            aspectRatio?: ('21 / 9' | '16 / 9' | '4 / 3') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageBreak';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            /**
+             * Small uppercase label above the headline. Optional.
+             */
+            label?: string | null;
+            emphasis?: ('standard' | 'feature') | null;
+            /**
+             * For "Feature" emphasis, separate lines with a | character.
+             */
+            headline?: string | null;
+            /**
+             * Separate paragraphs with a blank line.
+             */
+            body?: string | null;
+            /**
+             * Optional — renders a small label/value grid below the body (e.g. Established, Team size).
+             */
+            stats?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Small print shown under the stats grid, e.g. noting the figures are placeholders.
+             */
+            statsDisclaimer?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textSection';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Shown instead of the grid when the Founders collection is empty.
+             */
+            note?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'founderGrid';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Shown instead of the grid when no credentials are published.
+             */
+            note?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'credentialsGrid';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            columns?:
+              | {
+                  label?: string | null;
+                  headline: string;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'splitText';
+          }
+        | {
+            background?: ('warm-white' | 'soft-white' | 'navy') | null;
+            label?: string | null;
+            columns?: ('1' | '2') | null;
+            items?:
+              | {
+                  /**
+                   * e.g. 01
+                   */
+                  number: string;
+                  title: string;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'numberedList';
+          }
+        | {
+            /**
+             * One field per line break — controls how the large headline wraps.
+             */
+            headlineLines?:
+              | {
+                  line: string;
+                  id?: string | null;
+                }[]
+              | null;
+            buttonLabel: string;
+            buttonHref: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'ctaBanner';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -667,6 +823,128 @@ export interface PagesSelect<T extends boolean = true> {
         metaTitle?: T;
         metaDescription?: T;
         ogImage?: T;
+      };
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              body?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageBreak?:
+          | T
+          | {
+              image?: T;
+              alt?: T;
+              aspectRatio?: T;
+              id?: T;
+              blockName?: T;
+            };
+        textSection?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              emphasis?: T;
+              headline?: T;
+              body?: T;
+              stats?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              statsDisclaimer?: T;
+              id?: T;
+              blockName?: T;
+            };
+        founderGrid?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              note?: T;
+              id?: T;
+              blockName?: T;
+            };
+        credentialsGrid?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              note?: T;
+              id?: T;
+              blockName?: T;
+            };
+        splitText?:
+          | T
+          | {
+              background?: T;
+              columns?:
+                | T
+                | {
+                    label?: T;
+                    headline?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        numberedList?:
+          | T
+          | {
+              background?: T;
+              label?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    number?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        ctaBanner?:
+          | T
+          | {
+              headlineLines?:
+                | T
+                | {
+                    line?: T;
+                    id?: T;
+                  };
+              buttonLabel?: T;
+              buttonHref?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
